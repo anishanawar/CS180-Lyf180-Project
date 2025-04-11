@@ -1,6 +1,6 @@
-# LYFE 180
+# LYF 180
 
-Welcome to **LYFE 180** – a gentle space designed to support your journey of self-growth and balanced living. This web app is here to help you manage your healthy short-term and long-term goals, track daily habits, and celebrate every small win along the way!
+Welcome to **LYF 180** – a gentle space designed to support your journey of self-growth and balanced living. This web app is here to help you manage your healthy short-term and long-term goals, track daily habits, and celebrate every small win along the way!
 
 ## Table of Contents
 - [Overview](#overview)
@@ -10,10 +10,10 @@ Welcome to **LYFE 180** – a gentle space designed to support your journey of s
 - [Tech Stack](#tech-stack)
 
 ## Overview
-LYFE 180 isn’t just another productivity tool—it’s your personal sanctuary for planning, tracking, and achieving your goals in a calm and mindful way. Whether you’re setting new habits or reaching for long-term dreams, this app is here to support you every step of the way.
+LYF 180 isn’t just another productivity tool—it’s your personal sanctuary for planning, tracking, and achieving your goals in a calm and mindful way. Whether you’re setting new habits or reaching for long-term dreams, this app is here to support you every step of the way.
 
 ## Project Motivation
-We know life can feel overwhelming when it comes to balancing academics, careers, and personal growth. That’s why LYFE 180 was born. It’s a peaceful corner where you can organize your thoughts, set clear intentions, and gradually build the life you envision. Our aim is to offer you a soothing tool that not only tracks progress but also inspires you to keep moving forward.
+We know life can feel overwhelming when it comes to balancing academics, careers, and personal growth. That’s why LYF 180 was born. It’s a peaceful corner where you can organize your thoughts, set clear intentions, and gradually build the life you envision. Our aim is to offer you a soothing tool that not only tracks progress but also inspires you to keep moving forward.
 
 ## Features
 - **Personalized Account Management:**  
@@ -46,10 +46,12 @@ We know life can feel overwhelming when it comes to balancing academics, careers
   **Kanban Tasks:**
   - **To Do:**
     - Research the tech stack needed for account creation, and management.
+    - 
   - **In Progress:**
     - Account Access: Create a functional Login page that includes user inputting a Username and Password
-  - **Completed:**
     - 
+  - **Completed:**
+  - 
 
 ### User Story 2: Habit Tracking & Personal Growth Engagement
 - **Story:**  
