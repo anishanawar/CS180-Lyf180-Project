@@ -1,4 +1,12 @@
 # LYF 180
+ 
+ > Authors: 
+[Anisha Nawar](https://github.com/anishanawar)
+[Sookie Drabla](https://github.com/Sdrabla)
+[Uma Akundi](https://github.com/umizoomiexe)
+[Devin Peters](https://github.com/dpete050)
+[Evan Fang](https://github.com/evanzfang)
+[Julian Muñoz](https://github.com/JulianIMunoz)
 
 Welcome to **LYF 180** – a gentle space designed to support your journey of self-growth and balanced living. This web app is here to help you manage your healthy short-term and long-term goals, track daily habits, and celebrate every small win along the way!
 
