@@ -61,7 +61,7 @@ We know life can feel overwhelming when it comes to balancing academics, careers
   - **Completed:**
   - 
 
-### User Story 2: Habit Tracking & Personal Growth Engagement
+### User Story 2: Habit Tracking & Personal Growth Engagement [Julian
 - **Story:**  
   *As a user, I want to track my engagement with the app and have metrics for my goals.*
   
@@ -69,6 +69,19 @@ We know life can feel overwhelming when it comes to balancing academics, careers
   - **To Do:**
     - Implement a system that will track daily engagement.
     - Create a page that shows the percentage of completed goals throughout the week.
+  - **In Progress:**
+    - 
+  - **Completed:**
+    - 
+
+### User Story 3: Light/Dark Mode [Julian]
+- **Story:**  
+  *As a user, I want to be able to swap between a light and dark mode on the app at will to suit to suit my preferences.*
+  
+  **Kanban Tasks:**
+  - **To Do:**
+    - Implement an option that allows users to swap between a light/dark display.
+    - Have the current display setting remembered through logins.
   - **In Progress:**
     - 
   - **Completed:**
