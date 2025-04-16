@@ -61,7 +61,7 @@ We know life can feel overwhelming when it comes to balancing academics, careers
   - **Completed:**
   - 
 
-### User Story 2: Habit Tracking & Personal Growth Engagement [Julian
+### User Story 2: Habit Tracking & Personal Growth Engagement [Julian]
 - **Story:**  
   *As a user, I want to track my engagement with the app and have metrics for my goals.*
   
