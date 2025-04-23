@@ -1,0 +1,137 @@
+body {
+    background-color: #FFF7E8;
+}
+
+.container {
+    background-color: #FFF7E8;
+}
+
+#logo{
+    margin: 0;
+}
+#blueLogo {
+    position: relative;
+    color: #76A5AF;
+    font-family: pacifico;
+    font-size: 60px;
+}
+
+#pinkLogo {
+    position: relative;
+    color: #EA9999;
+    font-family: pacifico;
+    font-size: 40px;
+}
+
+#user{
+    
+}
+.header {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+.Quote{
+    font-family: Wix Madefor Display;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+#test-quote{
+    margin: 0;
+}
+.main {
+    padding-top: 30px;
+}
+.dashboard {
+    font-size: 40px;
+    margin: 30px;
+    background-color: #FFF7E8;
+}
+
+.dashboard-item {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: auto auto;
+}
+
+.Stats-item {
+    display: grid;
+    grid-template-columns: auto
+}
+
+.Stats-item > div {
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.Stats-item > div > h6 {
+        font-family: Wix Madefor Display;
+        color: #014240;
+        position: relative;
+        margin: 0;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.dashboard-item > div {
+    background-color: #BFD4D9;
+    padding: 20px;
+    border: 3px solid #014240;
+    border-radius: 10px;
+}
+
+.dashboard-item > div > h6 {
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#quotes{
+    height: 250px;
+}
+
+#habits{
+    height: 300px;
+}
+
+#goals{
+    height: 300px;
+}
+
+#stats {
+    grid-column: 1 / 4;
+    height: 300px;
+}
+
+#user {
+    font-family: DynaPuff;
+    color: #014240;
+    position: relative;
+    left: 200px;
+    font-size: 30px;
+    margin: 0;
+}
+
+#user-text {
+    margin: 0;
+}
+
+#habits > img {
+    position: absolute;
+    top: 220px;
+    left: 383px;
+    width: 30px;
+    height: 30px;
+}
+
+
