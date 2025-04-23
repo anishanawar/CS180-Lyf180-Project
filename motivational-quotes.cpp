@@ -32,7 +32,7 @@ int main()
     ifstream file(filename);
     if (!file)
     {
-        cerr << "🛑  Couldn’t open \"" << filename << "\"\n";
+        cerr << "Couldn’t open \"" << filename << "\"\n";
         return 1;
     }
 
