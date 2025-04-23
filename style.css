@@ -23,7 +23,6 @@ body {
     font-size: 40px;
 }
 
-
 .header {
     position: relative;
     margin-bottom: 0px;
@@ -111,17 +110,13 @@ body {
     height: 300px;
 }
 
-#user {
+
+#welcome {
     font-family: DynaPuff;
     color: #014240;
     position: relative;
-    left: 200px;
     font-size: 30px;
-    margin: 0;
-}
-
-#user-text {
-    margin: 0;
+    font-size: 50px;
 }
 
 #habits > img {
