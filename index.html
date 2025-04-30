@@ -28,6 +28,7 @@
                 </div>
                 <div id="goals">
                     <h6>Long Term Goals</h6>
+                    <button onclick="on()" id="add-goal-button">Add Goal</button>
                 </div>
             </div>
         </div>
@@ -36,7 +37,14 @@
                 <h6>Your Stats</h6>
             </div>
         </div>
+    <div id="add-goal-overlay">
+        <div id="add-goal-form">
+            <h6>What goal would you like to add?</h6>
+            <input type="text" id="goal-input" placeholder="Enter your goal">
+            <button onclick="off()" id="submit-goal">Submit</button>
+        </div>
     </div>
-    
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
