@@ -101,10 +101,12 @@ body {
 
 #habits{
     height: 300px;
+    width: 700px;
 }
 
 #goals{
     height: 300px;
+    width: 700px;
 }
 
 #add-goal{
@@ -133,11 +135,19 @@ body {
     height: 30px;
 }
 
-
+#goal-list-container{
+    position: relative;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    width: 600px;
+    height: 200px;
+    border: 3px solid #014240;
+    
+}
 
 #add-goal-overlay{
     position: fixed;
-    display: block;
+    display: none;
     background-color: rgba(0, 0, 0, 0.701);
     width: 100%;
     height: 100%;

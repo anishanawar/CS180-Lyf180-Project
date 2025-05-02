@@ -29,6 +29,10 @@
                 <div id="goals">
                     <h6>Long Term Goals</h6>
                     <button onclick="on()" id="add-goal-button">Add Goal</button>
+                    <button onclick="clearGoals()" id="clear-all-button">Clear All</button>
+                    <div id="goal-list-container">
+                        <ol id="goal-list"></ol>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,7 +45,7 @@
         <div id="add-goal-form">
             <h6>What goal would you like to add?</h6>
             <input type="text" id="goal-input" placeholder="Enter your goal">
-            <button onclick="off()" id="submit-goal">Submit</button>
+            <button onclick="off(), addGoal()" id="submit-goal">Submit</button>
         </div>
     </div>
     </div>
