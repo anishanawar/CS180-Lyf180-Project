@@ -135,13 +135,45 @@ body {
     height: 30px;
 }
 
+#goal-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#goal-header-text{
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#add-goal-button{
+    position: relative;
+    border: none;
+    left: 200px;
+    background: none;
+    cursor: pointer;
+}
+#add-goal-icon{
+    border: none;
+    display: block;
+    position: relative;
+    height: 60px;
+    width: 60px;
+}
+
 #goal-list-container{
     position: relative;
     padding-bottom: 20px;
     overflow-y: auto;
     width: 600px;
     height: 200px;
-    border: 3px solid #014240;
     
 }
 
@@ -202,4 +234,5 @@ body {
     font-size: 40px;
     border-radius: 20px;
     border: 3px solid #014240;
+    cursor: pointer;
 }

@@ -27,9 +27,11 @@
                     <h6>Daily Habits </h6>
                 </div>
                 <div id="goals">
-                    <h6>Long Term Goals</h6>
-                    <button onclick="on()" id="add-goal-button">Add Goal</button>
-                    <button onclick="clearGoals()" id="clear-all-button">Clear All</button>
+                    <div id="goal-header">  
+                        <h6 id="goal-header-text">Long Term Goals</h6>
+                        <button onclick="on()" id="add-goal-button"><img src="src/images/plus.png" alt="plus" id="add-goal-icon"></button>
+                        <button  onclick="clearGoals()" id="clear-all-button">Clear All</button>
+                    </div>
                     <div id="goal-list-container">
                         <ol id="goal-list"></ol>
                     </div>
