@@ -126,10 +126,28 @@ body {
 
 #habits > img {
     position: absolute;
-    top: 220px;
-    left: 383px;
+    top: 298px;
+    left: 800px;
     width: 30px;
     height: 30px;
 }
 
+/* #habits > img {
+    position: absolute;
+    top: 220px;
+    left: 383px;
+    width: 30px;
+    height: 30px;
+} */
 
+#goals > img {
+    position: absolute;
+    top: 298px;
+    left: 1695px;
+    width: 30px;
+    height: 30px;
+}
+
+img[src='src/images/plus.png']:hover {
+    background-color: #e0e0e0;
+}

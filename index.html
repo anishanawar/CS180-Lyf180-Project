@@ -25,9 +25,11 @@
                 
                 <div id="habits">
                     <h6>Daily Habits </h6>
+                    <button id = "addButton">ADD</button>
                 </div>
                 <div id="goals">
                     <h6>Long Term Goals</h6>
+                    <button id = "addButton2">ADD</button>
                 </div>
             </div>
         </div>
@@ -37,6 +39,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const addButton = document.getElementById('addButton');
+        const plus = document.createElement('img');
+        plus.src = 'src/images/plus.png';
+        addButton.parentNode.replaceChild(plus, addButton);
+
+        plus.addEventListener('click', function(event){window.location.href = "addhabit.html"});
+
+        const addButton2 = document.getElementById('addButton2');
+        const plus2 = document.createElement('img');
+        plus2.src = 'src/images/plus.png';
+        addButton2.parentNode.replaceChild(plus2, addButton2);
+
+        plus2.addEventListener('click', function(event){window.location.href = "addhabit.html"});
+    </script>
     
 </body>
 </html>
