@@ -10,11 +10,11 @@
 <body>
     <div class="container">
         <div >
-            <h1 id="logo"><span id="blueLogo">Lyf</span><span id="pinkLogo">180</span><span id="dashboard">Dashboard</span></h1>
+            <h1 id="logo"><span id="blueLogo">Lyf</span><span id="pinkLogo">180</span><span id="dashboard"> Dashboard</span></h1>
         </div>
-        <div id="user">
-            <h1 id="user-text"> Welcome User</h1>
-        </div>
+
+        <h1 id="welcome"> Welcome User </h1>
+        
         <div class="Quote">
             <h4 id="test-quote"> "The only way to do great work is to love what you do." - Steve Jobs </h4>
         </div>
@@ -27,7 +27,14 @@
                     <h6>Daily Habits </h6>
                 </div>
                 <div id="goals">
-                    <h6>Long Term Goals</h6>
+                    <div id="goal-header">  
+                        <h6 id="goal-header-text">Long Term Goals</h6>
+                        <button onclick="on()" id="add-goal-button"><img src="src/images/plus.png" alt="plus" id="add-goal-icon"></button>
+                        <button  onclick="clearGoals()" id="clear-all-button">Clear All</button>
+                    </div>
+                    <div id="goal-list-container">
+                        <ol id="goal-list"></ol>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,7 +43,14 @@
                 <h6>Your Stats</h6>
             </div>
         </div>
+    <div id="add-goal-overlay">
+        <div id="add-goal-form">
+            <h6>What goal would you like to add?</h6>
+            <input type="text" id="goal-input" placeholder="Enter your goal">
+            <button onclick="off(), addGoal()" id="submit-goal">Submit</button>
+        </div>
     </div>
-    
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
