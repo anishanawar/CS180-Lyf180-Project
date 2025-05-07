@@ -20,3 +20,4 @@ function clearGoals() {
     goalList.innerHTML = "";
 }
 
+
