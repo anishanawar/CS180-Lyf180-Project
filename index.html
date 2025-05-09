@@ -24,12 +24,20 @@
             <div class="dashboard-item">
                 
                 <div id="habits">
-                    <h6>Daily Habits </h6>
+                    <div id="habit-header">  
+                        <h6 id="habit-header-text">Daily Habits</h6>
+                        <button onclick="onHabit()" id="add-habit-button"><img src="src/images/plus.png" alt="plus" id="add-habit-icon"></button>
+                        <button  onclick="clearHabits()" id="clear-all-button">Clear All</button>
+                    </div>
+                    <div id="habit-list-container">
+                        <ol id="habit-list"></ol>
+                    </div>
                 </div>
+
                 <div id="goals">
                     <div id="goal-header">  
                         <h6 id="goal-header-text">Long Term Goals</h6>
-                        <button onclick="on()" id="add-goal-button"><img src="src/images/plus.png" alt="plus" id="add-goal-icon"></button>
+                        <button onclick="onGoal()" id="add-goal-button"><img src="src/images/plus.png" alt="plus" id="add-goal-icon"></button>
                         <button  onclick="clearGoals()" id="clear-all-button">Clear All</button>
                     </div>
                     <div id="goal-list-container">
@@ -43,11 +51,18 @@
                 <h6>Your Stats</h6>
             </div>
         </div>
+    <div id="add-habit-overlay">
+        <div id="add-habit-form">
+            <h6>What habit would you like to add?</h6>
+            <input type="text" id="habit-input" placeholder="Enter your habit">
+            <button onclick="offHabit(), addHabit()" id="submit-habit">Submit</button>
+        </div>
+    </div>
     <div id="add-goal-overlay">
         <div id="add-goal-form">
             <h6>What goal would you like to add?</h6>
             <input type="text" id="goal-input" placeholder="Enter your goal">
-            <button onclick="off(), addGoal()" id="submit-goal">Submit</button>
+            <button onclick="offGoal(), addGoal()" id="submit-goal">Submit</button>
         </div>
     </div>
     </div>

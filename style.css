@@ -135,6 +135,108 @@ body {
     height: 30px;
 }
 
+#habit-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#habit-header-text{
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#add-habit-button{
+    position: relative;
+    border: none;
+    left: 200px;
+    background: none;
+    cursor: pointer;
+}
+#add-habit-icon{
+    border: none;
+    display: block;
+    position: relative;
+    height: 60px;
+    width: 60px;
+}
+
+#habit-list-container{
+    position: relative;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    width: 600px;
+    height: 200px;
+    
+}
+
+#add-habit-overlay{
+    position: fixed;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.701);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#add-habit-form{
+    position: relative;
+    align-items: center;
+    background-color: #ea9999;
+    border: 3px solid #014240;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 200px;
+}
+
+#add-habit-form > h6 {
+    font-family: Wix Made for Display;
+    font-weight: 100;
+    color: #000000;
+    position: relative;
+    text-align: center;
+    font-size: 80px;
+}
+
+#habit-input{
+    position: relative;
+    width: 90%;
+    align-items: center;
+    height: 50px;
+    border: 3px solid #014240;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: Wix Madefor Display;
+    color: #014240;
+    font-size: 40px;
+    left: 5%;
+}
+
+#submit-habit{
+    margin: 30px;
+    left: 40%;
+    position: relative;
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    height: 70px;
+    background-color: #014240;
+    color: #ffffff;
+    font-size: 40px;
+    border-radius: 20px;
+    border: 3px solid #014240;
+    cursor: pointer;
+}
+
 #goal-header{
     display: flex;
     justify-content: center;
