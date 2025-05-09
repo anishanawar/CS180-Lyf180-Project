@@ -3,10 +3,9 @@
 
 #include <string>
 
-/*
- * Reads the CSV at csvPath (default "quotes.csv"),
- * selects a random entry, and returns it in printable form:
- */
+// Reads the CSV at csvPath (default "quotes.csv"),
+// picks a random line, and returns it as:
+//   "Quote text" -- Author
 std::string getRandomQuote(const std::string& csvPath = "quotes.csv");
 
-#endif
+#endif // RANDOM_QUOTE_H

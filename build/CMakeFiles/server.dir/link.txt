@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/server.dir/server.cpp.o CMakeFiles/server.dir/randomQuote.cpp.o -o server  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0 -lpthread 

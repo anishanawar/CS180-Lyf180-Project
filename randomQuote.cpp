@@ -1,61 +1,55 @@
-#include "RandomQuote.h"
-
+#include "randomQuote.h"
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <random>
-#include <ctime>
 #include <stdexcept>
 
-using namespace std;
+struct Quote {
+    std::string author;
+    std::string text;
+};
 
-static string strip_quotes(const string& s)
-{
-    if (s.size() >= 2 && s.front() == '"' && s.back() == '"')
-        return s.substr(1, s.size() - 2);
-    return s;
-}
+// Load all quotes once
+static std::vector<Quote> loadQuotes(const std::string& csvPath) {
+    std::ifstream file(csvPath);
+    if (!file) {
+        throw std::runtime_error("Couldn’t open " + csvPath);
+    }
 
-string getRandomQuote(const string& csvPath)
-{
-    ifstream file(csvPath);
-    if (!file)
-        throw runtime_error("Cannot open \"" + csvPath + '"');
+    std::vector<Quote> quotes;
+    std::string line;
 
-    string line;
-    getline(file, line); // skip header row
+    // Skip header row
+    if (!std::getline(file, line)) {
+        throw std::runtime_error("CSV is empty");
+    }
 
-    struct Quote { string author, text; };
-    vector<Quote> quotes;
-
-    while (getline(file, line))
-    {
-        size_t split = line.find("\",\"");
-        if (split == string::npos) continue;
-
-        string author = strip_quotes(line.substr(0, split + 1));
-        string text   = strip_quotes(line.substr(split + 2));
-
+    // Parse lines of the form: "Author","Quote text"
+    while (std::getline(file, line)) {
+        // find the quote separator
+        auto sep = line.find("\",\"");
+        if (sep == std::string::npos || line.size() < sep + 4) continue;
+        // author: between first " and sep
+        std::string author = line.substr(1, sep - 1);
+        // text: between sep+3 and last "
+        std::string text = line.substr(sep + 3, line.size() - (sep + 4));
         quotes.push_back({author, text});
     }
 
-    if (quotes.empty())
-        throw runtime_error("No quotes parsed from \"" + csvPath + '"');
-
-    mt19937 rng(static_cast<unsigned>(time(nullptr)));
-    uniform_int_distribution<size_t> dist(0, quotes.size() - 1);
-    const Quote& q = quotes[dist(rng)];
-
-    return '"' + q.text + "\"\n  -- " + q.author;
+    if (quotes.empty()) {
+        throw std::runtime_error("No quotes found in " + csvPath);
+    }
+    return quotes;
 }
 
-/*
-example usage:
+std::string getRandomQuote(const std::string& csvPath) {
+    // Static so we only load once
+    static const auto quotes = loadQuotes(csvPath);
+    static std::mt19937_64 rng{std::random_device{}()};
+    std::uniform_int_distribution<size_t> dist(0, quotes.size() - 1);
 
-    try {
-        std::cout << '\n' << getRandomQuote() << '\n';
-    }
-    catch (const std::exception& ex) {
-        std::cerr << "Error: " << ex.what() << '\n';
-        return 1;
-    }
-*/
+    const auto& q = quotes[dist(rng)];
+    // Format with quotes + author
+    return "\"" + q.text + "\" -- " + q.author;
+}
