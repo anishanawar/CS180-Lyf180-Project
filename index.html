@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
-
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
+    <div class="topbar">
+        <button id="logout-button" onclick="logout()">Logout</button>
+    </div>
     <div class="container">
-        <div >
+        <div>
             <h1 id="logo"><span id="blueLogo">Lyf</span><span id="pinkLogo">180</span><span id="dashboard"> Dashboard</span></h1>
         </div>
 
-        <h1 id="welcome"> Welcome User </h1>
+        <div class="welcome-container">
+            <h1 id="welcome">Welcome <span id="username-display"></span></h1>
+        </div>
         
         <div class="Quote">
             <h4 id="test-quote">Loading…</h4>
@@ -21,10 +32,16 @@
     </div>
     <div class="main">
         <div class="dashboard">
-            <div class="dashboard-item">
-                
+            <div class="dashboard-row bottom-row">
                 <div id="habits">
-                    <h6>Daily Habits </h6>
+                    <div id="habits-header">  
+                        <h6 id="habits-header-text">Daily Habits</h6>
+                        <button onclick="onHabit()" id="add-habit-button"><img src="src/images/plus.png" alt="plus" id="add-habit-icon"></button>
+                        <button onclick="clearHabits()" id="clear-all-habits-button">Clear All</button>
+                    </div>
+                    <div id="habits-list-container">
+                        <ol id="habits-list"></ol>
+                    </div>
                 </div>
                 <div id="goals">
                     <div id="goal-header">  
@@ -37,20 +54,52 @@
                     </div>
                 </div>
             </div>
+            <div class="dashboard-row top-row">
+                <div id="mood-container" class="mood-section"></div>
+                <div id="suggestions-container" class="suggestions-section"></div>
+                <div id="badges" class="badges-section">
+                    <div id="badges-header">
+                        <h6 id="badges-header-text">Achievement Badges</h6>
+                    </div>
+                    <div id="badges-list">
+                        <!-- Badges will be rendered here -->
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="Stats-item">
             <div id="stats">
                 <h6>Your Stats</h6>
             </div>
         </div>
+        <!-- Leaderboard Section -->
+        <div class="Leaderboard-item">
+            <div id="leaderboard">
+                <h6>Leaderboard</h6>
+                <div id="leaderboard-list">Loading...</div>
+            </div>
+        </div>
     <div id="add-goal-overlay">
         <div id="add-goal-form">
+            <button id="close-form" onclick="off()">&times;</button>
             <h6>What goal would you like to add?</h6>
             <input type="text" id="goal-input" placeholder="Enter your goal">
-            <button onclick="off(), addGoal()" id="submit-goal">Submit</button>
+            <button onclick="addGoal()" id="submit-goal">Submit</button>
+        </div>
+    </div>
+    <div id="add-habit-overlay">
+        <div id="add-habit-form">
+            <button id="close-habit-form" onclick="offHabit()">&times;</button>
+            <h6>What habit would you like to add?</h6>
+            <input type="text" id="habit-input" placeholder="Enter your habit">
+            <button onclick="addHabit()" id="submit-habit">Submit</button>
         </div>
     </div>
     </div>
+    <script>
+        // Display username
+        document.getElementById('username-display').textContent = localStorage.getItem('username') || 'User';
+    </script>
     <script src="main.js"></script>
 </body>
 </html>
