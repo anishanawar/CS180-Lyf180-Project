@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname))); // Serve static files from current directory
 
 // MongoDB connection
-const uri = mongodb+srv://evanfang:evan8698239@lyf180.4judkjx.mongodb.net/?retryWrites=true&w=majority&appName=LYF180;
+const uri = "mongodb+srv://evanfang:evan8698239@lyf180.4judkjx.mongodb.net/?retryWrites=true&w=majority&appName=LYF180";
 const clientOptions = {
     serverApi: {
         version: '1',
