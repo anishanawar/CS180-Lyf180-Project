@@ -1196,3 +1196,69 @@ body.login-page {
         padding: 18px 6vw 18px 6vw;
     }
 }
+
+.completion-popup {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    z-index: 2000;
+    background: linear-gradient(135deg, #fff7e8 60%, #bfe3e0 100%);
+    border: 2.5px solid #76A5AF;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(118, 165, 175, 0.18);
+    padding: 22px 32px 18px 32px;
+    min-width: 260px;
+    max-width: 90vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, bottom 0.2s;
+}
+
+.completion-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    bottom: 60px;
+}
+
+.completion-popup .revert-button {
+    margin-top: 14px;
+    background: #EA9999;
+    color: #014240;
+    border-radius: 12px;
+    font-weight: bold;
+    padding: 8px 18px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.completion-popup .revert-button:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+.completion-popup .expiration-bar {
+    width: 100%;
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    margin: 12px 0 0 0;
+    overflow: hidden;
+}
+
+.completion-popup .expiration-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #76A5AF 0%, #EA9999 100%);
+    width: 100%;
+    animation: countdown 5s linear forwards;
+}
+
+@keyframes countdown {
+    from { width: 100%; }
+    to { width: 0%; }
+}
