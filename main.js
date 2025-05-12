@@ -160,7 +160,7 @@ async function loadUserData() {
 
         // Fetch and display quote
         try {
-            const quoteResponse = await fetch('http://localhost:8080/api/quote');
+            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
             if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
             const quoteData = await quoteResponse.json();
             const quoteElement = document.getElementById('test-quote');
@@ -1015,12 +1015,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         // Fetch and display quote
         try {
-            const response = await fetch("/api/quote");
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json();
-            const el = document.getElementById("test-quote");
-            if (el) {
-                el.textContent = data.quote || data.error;
+            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
+            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
+            const quoteData = await quoteResponse.json();
+            const quoteElement = document.getElementById('test-quote');
+            if (quoteElement) {
+                quoteElement.textContent = quoteData.quote || quoteData.error;
             }
         } catch (err) {
             console.error('Error fetching quote:', err);
