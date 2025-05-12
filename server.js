@@ -10,16 +10,22 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname))); // Serve static files from current directory
 
 // MongoDB connection
-mongoose.connect('process.env.MONGODB_URI', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => {
-    console.log('Successfully connected to MongoDB.');
-})
-.catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-});
+const uri = mongodb+srv://evanfang:evan8698239@lyf180.4judkjx.mongodb.net/?retryWrites=true&w=majority&appName=LYF180;
+const clientOptions = {
+    serverApi: {
+        version: '1',
+        strict: true,
+        deprecationErrors: true
+    }
+};
+
+mongoose.connect(uri, clientOptions)
+    .then(() => {
+        console.log('Successfully connected to MongoDB Atlas!');
+    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB:', error);
+    });
 
 // User Schema
 const userSchema = new mongoose.Schema({
