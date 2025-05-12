@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginFormDiv = document.querySelector('.login-form');
     const signupFormDiv = document.querySelector('.signup-form');
 
+    const BACKEND_URL = "https://cs180-lyf180-project.onrender.com";
+
     // Toggle between login and signup forms
     showSignupLink.addEventListener('click', (e) => {
         e.preventDefault();
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value;
 
         try {
-            const response = await fetch('http://localhost:3000/api/users/login', {
+            const response = await fetch(`${BACKEND_URL}/api/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             console.log('Attempting to register user:', username);
-            const response = await fetch('http://localhost:3000/api/users/register', {
+            const response = await fetch(`${BACKEND_URL}/api/users/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

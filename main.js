@@ -1,3 +1,5 @@
+const BACKEND_URL = "https://cs180-lyf180-project.onrender.com";
+
 // Logout function
 function logout() {
     // Clear login state
@@ -40,7 +42,7 @@ async function fetchUserData() {
         const username = localStorage.getItem('username');
         if (!username) return null;
 
-        const response = await fetch(`http://localhost:3000/api/users/${username}`);
+        const response = await fetch(`${BACKEND_URL}/api/users/${username}`);
         if (!response.ok) throw new Error('Failed to fetch user data');
         const userData = await response.json();
         
@@ -71,7 +73,7 @@ async function saveCurrentUser(userData) {
             unlockedBadges: userData.unlockedBadges
         };
 
-        const response = await fetch(`http://localhost:3000/api/users/${username}`, {
+        const response = await fetch(`${BACKEND_URL}/api/users/${username}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,7 +83,7 @@ async function saveCurrentUser(userData) {
         if (!response.ok) throw new Error('Failed to save user data');
         
         // Fetch the latest user data from the server and update the cache
-        const updatedResponse = await fetch(`http://localhost:3000/api/users/${username}`);
+        const updatedResponse = await fetch(`${BACKEND_URL}/api/users/${username}`);
         if (updatedResponse.ok) {
             const updatedUser = await updatedResponse.json();
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
@@ -907,7 +909,7 @@ function updateHabitsDisplay() {
 // Fetch and display leaderboard
 async function loadLeaderboard() {
     try {
-        const response = await fetch('http://localhost:3000/api/leaderboard');
+        const response = await fetch(`${BACKEND_URL}/api/leaderboard`);
         if (!response.ok) throw new Error('Failed to fetch leaderboard');
         const users = await response.json();
         const leaderboardList = document.getElementById('leaderboard-list');
@@ -1089,7 +1091,7 @@ function addReflectionHistoryUI() {
     // Fetch all reflection dates
     const username = localStorage.getItem('username');
     if (!username) return;
-    fetch(`http://localhost:3000/api/users/${username}/reflections`)
+    fetch(`${BACKEND_URL}/api/users/${username}/reflections`)
         .then(res => res.json())
         .then(data => {
             if (!data.reflections) return;
@@ -1114,7 +1116,7 @@ function addReflectionHistoryUI() {
 function loadReflectionForDate(dateStr) {
     const username = localStorage.getItem('username');
     if (!username) return;
-    fetch(`http://localhost:3000/api/users/${username}/reflections`)
+    fetch(`${BACKEND_URL}/api/users/${username}/reflections`)
         .then(res => res.json())
         .then(data => {
             if (!data.reflections) return;
@@ -1134,7 +1136,7 @@ function saveReflection() {
     if (dateSelect) {
         dateStr = dateSelect.value;
     }
-    fetch(`http://localhost:3000/api/users/${username}/reflection`, {
+    fetch(`${BACKEND_URL}/api/users/${username}/reflection`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
