@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
+=======
+>>>>>>> main
     <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
+<<<<<<< HEAD
     <script>
         // Check if user is logged in
         if (!localStorage.getItem('isLoggedIn')) {
@@ -28,10 +32,25 @@
         
         <div class="Quote">
             <h4 id="test-quote">Loading…</h4>
+=======
+
+</head>
+<body>
+    <div class="container">
+        <div >
+            <h1 id="logo"><span id="blueLogo">Lyf</span><span id="pinkLogo">180</span><span id="dashboard"> Dashboard</span></h1>
+        </div>
+
+        <h1 id="welcome"> Welcome User </h1>
+        
+        <div class="Quote">
+            <h4 id="test-quote"> "The only way to do great work is to love what you do." - Steve Jobs </h4>
+>>>>>>> main
         </div>
     </div>
     <div class="main">
         <div class="dashboard">
+<<<<<<< HEAD
             <div class="dashboard-row bottom-row">
                 <div id="habits">
                     <div id="habits-header">  
@@ -42,6 +61,12 @@
                     <div id="habits-list-container">
                         <ol id="habits-list"></ol>
                     </div>
+=======
+            <div class="dashboard-item">
+                
+                <div id="habits">
+                    <h6>Daily Habits </h6>
+>>>>>>> main
                 </div>
                 <div id="goals">
                     <div id="goal-header">  
@@ -54,6 +79,7 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="dashboard-row top-row">
                 <div id="mood-container" class="mood-section"></div>
                 <div id="suggestions-container" class="suggestions-section"></div>
@@ -66,12 +92,15 @@
                     </div>
                 </div>
             </div>
+=======
+>>>>>>> main
         </div>
         <div class="Stats-item">
             <div id="stats">
                 <h6>Your Stats</h6>
             </div>
         </div>
+<<<<<<< HEAD
         <!-- Leaderboard Section -->
         <div class="Leaderboard-item">
             <div id="leaderboard">
@@ -100,6 +129,16 @@
         // Display username
         document.getElementById('username-display').textContent = localStorage.getItem('username') || 'User';
     </script>
+=======
+    <div id="add-goal-overlay">
+        <div id="add-goal-form">
+            <h6>What goal would you like to add?</h6>
+            <input type="text" id="goal-input" placeholder="Enter your goal">
+            <button onclick="off(), addGoal()" id="submit-goal">Submit</button>
+        </div>
+    </div>
+    </div>
+>>>>>>> main
     <script src="main.js"></script>
 </body>
 </html>

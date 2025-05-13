@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const BACKEND_URL = "https://cs180-lyf180-project.onrender.com";
 
 // Logout function
@@ -488,10 +489,19 @@ function showError(formId, message) {
             errorDiv.remove();
         }
     }, 3000);
+=======
+function on() {
+    document.getElementById("add-goal-overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("add-goal-overlay").style.display = "none";
+>>>>>>> main
 }
 
 function addGoal() {
     const goalInput = document.getElementById("goal-input").value;
+<<<<<<< HEAD
     if (!goalInput.trim()) {
         showError('add-goal-form', 'Please enter a goal before submitting');
         return;
@@ -536,11 +546,39 @@ function addHabit() {
 
     document.getElementById("habit-input").value = "";
     offHabit(); // Only close the form if submission was successful
+=======
+    const goalList = document.getElementById("goal-list");
+    const goalItem = document.createElement("li");
+    goalItem.textContent = goalInput;
+
+    const deleteButton = document.createElement("button");
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "src/images/trashIcon.png";
+    deleteIcon.alt = "delete";
+    deleteButton.style.width = "10px";
+    deleteButton.style.height = "10px";
+    deleteButton.style.border = "none";
+    deleteButton.style.background = "none";
+    deleteButton.style.cursor = "pointer";
+    deleteButton.style.position = "relative";
+    deleteButton.style.left = "10px";
+    deleteButton.style.top = "5px";
+    deleteButton.appendChild(deleteIcon);
+
+    deleteButton.onclick = () => {
+        goalList.removeChild(goalItem);
+    };
+
+    goalItem.appendChild(deleteButton);
+    goalList.appendChild(goalItem);
+    document.getElementById("goal-input").value = "";
+>>>>>>> main
 }
 
 function clearGoals() {
     const goalList = document.getElementById("goal-list");
     goalList.innerHTML = "";
+<<<<<<< HEAD
     
     // Clear goals in user data
     const user = getCurrentUser();
@@ -1545,3 +1583,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderBadges();
 });
   
+=======
+}
+
+
+>>>>>>> main

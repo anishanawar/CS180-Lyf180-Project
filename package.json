@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "lyf180",
   "version": "1.0.0",
   "description": "LYF 180 - A personal growth and goal tracking application",
@@ -17,3 +18,20 @@
     "nodemon": "^3.0.1"
   }
 }
+=======
+  "name": "cs180-lyf180-project",
+  "version": "1.0.0",
+  "description": "> Authors: \r [Anisha Nawar](https://github.com/anishanawar)\r [Sookie Drabla](https://github.com/Sdrabla)\r [Uma Akundi](https://github.com/umizoomiexe)\r [Devin Peters](https://github.com/dpete050)\r [Evan Fang](https://github.com/evanzfang)\r [Julian Muñoz](https://github.com/JulianIMunoz)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
+
+>>>>>>> main
