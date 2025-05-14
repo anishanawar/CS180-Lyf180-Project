@@ -33,3 +33,10 @@
 
 # Node.js dependencies
 node_modules/
+
+# CMake build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
