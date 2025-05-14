@@ -1,0 +1,64 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS habit_tracker;
+USE habit_tracker;
+
+-- Table for user accounts
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    salt VARCHAR(255), -- optional: store salt if using custom encryption
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table for user goals
+CREATE TABLE goals (
+    goal_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    target_date DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Table for habits created by users
+CREATE TABLE habits (
+    habit_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Table to track daily habit completions
+CREATE TABLE habit_progress (
+    progress_id INT AUTO_INCREMENT PRIMARY KEY,
+    habit_id INT NOT NULL,
+    completion_date DATE NOT NULL,
+    FOREIGN KEY (habit_id) REFERENCES habits(habit_id) ON DELETE CASCADE,
+    UNIQUE (habit_id, completion_date) -- ensure only one entry per habit per day
+);
+
+-- Table to track daily user interaction (used for streaks)
+CREATE TABLE daily_interactions (
+    interaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    interaction_date DATE NOT NULL,
+    interacted BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    UNIQUE (user_id, interaction_date) -- only one interaction per day per user
+);
+
+-- Sample query: habit completion percentage
+SELECT 
+    h.name AS habit_name,
+    DATEDIFF(CURDATE(), h.created_at) + 1 AS total_days,
+    COUNT(hp.completion_date) AS completed_days,
+    ROUND(COUNT(hp.completion_date) / (DATEDIFF(CURDATE(), h.created_at) + 1) * 100, 2) AS completion_percentage
+FROM habits h
+LEFT JOIN habit_progress hp ON h.habit_id = hp.habit_id
+WHERE h.user_id = 1
+GROUP BY h.habit_id;
+
