@@ -1,16 +1,19 @@
 {
-  "name": "cs180-lyf180-project",
+  "name": "lyf180",
   "version": "1.0.0",
-  "description": "> Authors: \r [Anisha Nawar](https://github.com/anishanawar)\r [Sookie Drabla](https://github.com/Sdrabla)\r [Uma Akundi](https://github.com/umizoomiexe)\r [Devin Peters](https://github.com/dpete050)\r [Evan Fang](https://github.com/evanzfang)\r [Julian Muñoz](https://github.com/JulianIMunoz)",
-  "main": "main.js",
+  "description": "LYF 180 - A personal growth and goal tracking application",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^6.16.0",
+    "mongoose": "^7.5.0"
+  },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "nodemon": "^3.0.1"
   }
 }
-
