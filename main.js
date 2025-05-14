@@ -157,23 +157,48 @@ async function loadUserData() {
 
         // Render badges
         renderBadges();
+async function fetchQuotes() {
+    try {
+        const response = await fetch('quotes.csv');
+        const text = await response.text();
+        const quotes = parseQuotesCSV(text);
+        return quotes;
+    } catch (error) {
+        console.error('Error fetching quotes:', error);
+        return [];
+    }
+}
 
-        // Fetch and display quote
-        try {
-            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
-            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
-            const quoteData = await quoteResponse.json();
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = quoteData.quote || quoteData.error;
-            }
-        } catch (error) {
-            console.error('Error fetching quote:', error);
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = "Every day is a new beginning.";
-            }
+// Function to parse CSV text into an array of quotes
+function parseQuotesCSV(csvText) {
+    const lines = csvText.split('\n').slice(1); // Skip header
+    const quotes = lines.map(line => {
+        const [author, text] = line.split('","').map(s => s.replace(/"/g, ''));
+        return { author, text };
+    }).filter(quote => quote.author && quote.text); // Filter out invalid quotes
+    return quotes;
+}
+
+// Function to get a random quote
+function getRandomQuote(quotes) {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    return quotes[randomIndex];
+}
+
+// Fetch and display a random quote
+async function displayRandomQuote() {
+    const quotes = await fetchQuotes();
+    if (quotes.length > 0) {
+        const randomQuote = getRandomQuote(quotes);
+        const quoteElement = document.getElementById('test-quote');
+        if (quoteElement) {
+            quoteElement.textContent = `"${randomQuote.text}" -- ${randomQuote.author}`;
         }
+    }
+}
+        // Fetch and display quote
+        await displayRandomQuote();
+
 
         // Initialize reminders
         if (user.reminders) {
@@ -1013,22 +1038,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
-        // Fetch and display quote
-        try {
-            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
-            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
-            const quoteData = await quoteResponse.json();
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = quoteData.quote || quoteData.error;
-            }
-        } catch (err) {
-            console.error('Error fetching quote:', err);
-            const el = document.getElementById("test-quote");
-            if (el) {
-                el.textContent = "Couldn't load quote.";
-            }
-        }
+        await displayRandomQuote();
 
         // Initialize mood tracking
         const user = await getCurrentUser();
