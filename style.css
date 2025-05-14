@@ -1262,3 +1262,241 @@ body.login-page {
     from { width: 100%; }
     to { width: 0%; }
 }
+body {
+    background-image: url(src/images/lyf180_Background.png);
+    background-color: #FFF7E8;
+}
+
+.container {
+    background-image: url(src/images/lyf180_Background.png);
+
+}
+
+#logo{
+    margin: 0;
+}
+#blueLogo {
+    position: relative;
+    color: #76A5AF;
+    font-family: pacifico;
+    font-size: 60px;
+}
+
+#pinkLogo {
+    position: relative;
+    color: #EA9999;
+    font-family: pacifico;
+    font-size: 40px;
+}
+
+.header {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+.Quote{
+    font-family: Wix Madefor Display;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+#test-quote{
+    margin: 0;
+}
+.main {
+    padding-top: 30px;
+}
+.dashboard {
+    font-size: 40px;
+    margin: 30px;
+    background-color: #FFF7E8;
+}
+
+.dashboard-item {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: auto auto;
+}
+
+.Stats-item {
+    display: grid;
+    grid-template-columns: auto
+}
+
+.Stats-item > div {
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.Stats-item > div > h6 {
+        font-family: Wix Madefor Display;
+        color: #014240;
+        position: relative;
+        margin: 0;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.dashboard-item > div {
+    background-color: #BFD4D9;
+    padding: 20px;
+    border: 3px solid #014240;
+    border-radius: 10px;
+}
+
+.dashboard-item > div > h6 {
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#quotes{
+    height: 250px;
+}
+
+#habits{
+    height: 300px;
+    width: 700px;
+}
+
+#goals{
+    height: 300px;
+    width: 700px;
+}
+
+#add-goal{
+    position: relative;
+}
+
+#stats {
+    grid-column: 1 / 4;
+    height: 300px;
+}
+
+
+#welcome {
+    font-family: DynaPuff;
+    color: #014240;
+    position: relative;
+    font-size: 30px;
+    font-size: 50px;
+}
+
+#habits > img {
+    position: absolute;
+    top: 220px;
+    left: 383px;
+    width: 30px;
+    height: 30px;
+}
+
+#goal-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#goal-header-text{
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#add-goal-button{
+    position: relative;
+    border: none;
+    left: 200px;
+    background: none;
+    cursor: pointer;
+}
+#add-goal-icon{
+    border: none;
+    display: block;
+    position: relative;
+    height: 60px;
+    width: 60px;
+}
+
+#goal-list-container{
+    position: relative;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    width: 600px;
+    height: 200px;
+    
+}
+
+#add-goal-overlay{
+    position: fixed;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.701);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#add-goal-form{
+    position: relative;
+    align-items: center;
+    background-color: #ea9999;
+    border: 3px solid #014240;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 200px;
+}
+
+#add-goal-form > h6 {
+    font-family: Wix Made for Display;
+    font-weight: 100;
+    color: #000000;
+    position: relative;
+    text-align: center;
+    font-size: 80px;
+}
+
+#goal-input{
+    position: relative;
+    width: 90%;
+    align-items: center;
+    height: 50px;
+    border: 3px solid #014240;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: Wix Madefor Display;
+    color: #014240;
+    font-size: 40px;
+    left: 5%;
+}
+
+#submit-goal{
+    margin: 30px;
+    left: 40%;
+    position: relative;
+    width: 150px;
+    text-align: center;
+    align-items: center;
+    height: 70px;
+    background-color: #014240;
+    color: #ffffff;
+    font-size: 40px;
+    border-radius: 20px;
+    border: 3px solid #014240;
+    cursor: pointer;
+}
