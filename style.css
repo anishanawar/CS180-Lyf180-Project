@@ -1,28 +1,50 @@
+html {
+    font-size: 15px;
+}
+
 body {
     background-image: url(src/images/lyf180_Background.png);
     background-color: #FFF7E8;
-}
-
-.container {
-    background-image: url(src/images/lyf180_Background.png);
-
-}
-
-#logo{
     margin: 0;
+    padding: 10px;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
 }
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(120deg, rgba(118,165,175,0.08) 0%, rgba(234,153,153,0.10) 100%);
+}
+
+.container, .main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#logo {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+}
+
 #blueLogo {
     position: relative;
     color: #76A5AF;
     font-family: pacifico;
-    font-size: 60px;
+    font-size: 2.5rem;
 }
 
 #pinkLogo {
     position: relative;
     color: #EA9999;
     font-family: pacifico;
-    font-size: 40px;
+    font-size: 1.7rem;
 }
 
 .header {
@@ -30,62 +52,73 @@ body {
     margin-bottom: 0px;
 }
 
-.Quote{
-    font-family: Wix Madefor Display;
-    font-size: 30px;
-    margin: 0;
+.Quote {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.1rem;
+    margin: 16px auto 0 auto;
+    display: block;
+    max-width: 80%;
+    padding: 2px 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 3px solid #014240;
+    min-height: unset !important;
+    max-height: unset !important;
+    float: none;
     text-align: center;
 }
 
-#test-quote{
-    margin: 0;
+#test-quote {
+    margin: 0 !important;
 }
+
 .main {
     padding-top: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
 .dashboard {
-    font-size: 40px;
-    margin: 30px;
+    font-size: 1.5rem;
+    margin: 16px;
     background-color: #FFF7E8;
 }
 
 .dashboard-item {
     display: grid;
-    gap: 40px;
-    grid-template-columns: auto auto;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 10px;
+}
+
+.dashboard-item > div, .Stats-item > div, .Leaderboard-item, .Quote, #mood-container, #suggestions-container, #habits, #goals {
+    min-width: 0;
+    min-height: 300px;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    display: block;
+    flex-direction: unset;
+    justify-content: unset;
+    position: relative;
+    z-index: 1;
 }
 
 .Stats-item {
     display: grid;
-    grid-template-columns: auto
+    grid-template-columns: auto;
 }
 
 .Stats-item > div {
     background-color: #BFD4D9;
     border: 3px solid #014240;
-    border-radius: 10px;
+    border-radius: 15px !important;
     padding: 20px;
+    margin: 0;
 }
 
 .Stats-item > div > h6 {
-        font-family: Wix Madefor Display;
-        color: #014240;
-        position: relative;
-        margin: 0;
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-.dashboard-item > div {
-    background-color: #BFD4D9;
-    padding: 20px;
-    border: 3px solid #014240;
-    border-radius: 10px;
-}
-
-.dashboard-item > div > h6 {
     font-family: Wix Madefor Display;
     color: #014240;
     position: relative;
@@ -95,21 +128,37 @@ body {
     justify-content: center;
     align-items: center;
 }
-#quotes{
+
+.dashboard-item > div {
+    background-color: #BFD4D9;
+    padding: 16px;
+    border: 3px solid #014240;
+    border-radius: 15px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+}
+
+.dashboard-item > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+#quotes {
     height: 250px;
 }
 
-#habits{
-    height: 300px;
-    width: 700px;
+#habits, #goals {
+    height: auto;
+    min-height: 300px;
+    width: 100%;
+    position: relative;
 }
 
-#goals{
-    height: 300px;
-    width: 700px;
-}
-
-#add-goal{
+#add-goal {
     position: relative;
 }
 
@@ -118,13 +167,13 @@ body {
     height: 300px;
 }
 
-
 #welcome {
-    font-family: DynaPuff;
+    font-family: 'DynaPuff', cursive;
     color: #014240;
-    position: relative;
-    font-size: 30px;
-    font-size: 50px;
+    text-align: center;
+    font-size: 2rem;
+    margin: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #habits > img {
@@ -135,104 +184,1081 @@ body {
     height: 30px;
 }
 
-#goal-header{
+#goal-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    position: relative;
 }
 
-#goal-header-text{
-    font-family: Wix Madefor Display;
-    color: #014240;
+#goal-header-text {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #014280;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+    text-shadow: 0 1px 2px rgba(20, 66, 128, 0.08);
+    display: block;
+    background: none;
     position: relative;
-    margin: 0;
-    font-size: 20px;
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#add-goal-button, #add-habit-button {
+    width: 48px;
+    height: 48px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-right: 20px;
+}
+
+#add-goal-icon, #add-habit-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+#clear-all-button {
+    position: relative;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'Wix Madefor Display', sans-serif;
+    color: #014240;
+    font-size: 16px;
+    padding: 8px 18px;
+    border-radius: 12px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#clear-all-button:hover {
+    background-color: #76A5AF;
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+#goal-list-container, #habits-list-container {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#goal-list li, #habits-list li {
+    box-sizing: border-box;
+    width: calc(100% - 24px);
+    overflow: hidden;
+    word-break: break-word;
+    margin: 5px 12px;
+    padding: 10px 16px 10px 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#goal-list li:hover, #habits-list li:hover {
+    background-color: rgba(234, 153, 153, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(234, 153, 153, 0.2);
+}
+
+#goal-list li span, #habits-list li span {
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#add-goal-form, #add-habit-form {
+    position: relative;
+    background: linear-gradient(135deg, #fbeee6 0%, #ea9999 100%);
+    border: 3px solid #014240;
+    border-radius: 24px;
+    padding: 28px 24px 20px 24px;
+    margin: 32px auto;
+    max-width: 420px;
+    min-width: 320px;
+    width: 95vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: formSlideIn 0.2s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Wix Madefor Display', 'Segoe UI', Arial, sans-serif;
+}
+
+@keyframes formSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#add-goal-form > h6, #add-habit-form > h6 {
+    font-family: 'DynaPuff', cursive, 'Wix Madefor Display', sans-serif !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #014240;
+    margin-bottom: 18px;
+    margin-top: 0;
+    letter-spacing: 0.5px;
     text-align: center;
 }
 
-#add-goal-button{
-    position: relative;
-    border: none;
-    left: 200px;
-    background: none;
-    cursor: pointer;
-}
-#add-goal-icon{
-    border: none;
-    display: block;
-    position: relative;
-    height: 60px;
-    width: 60px;
-}
-
-#goal-list-container{
-    position: relative;
-    padding-bottom: 20px;
-    overflow-y: auto;
-    width: 600px;
-    height: 200px;
-    
+#goal-input, #habit-input {
+    width: 90%;
+    height: 40px;
+    border: 2px solid #76A5AF;
+    border-radius: 14px;
+    padding: 10px 16px;
+    font-family: 'Wix Madefor Display', 'Segoe UI', Arial, sans-serif;
+    color: #014240;
+    font-size: 1.1rem;
+    margin: 16px 0 18px 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(234,153,153,0.08);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-#add-goal-overlay{
+#goal-input:focus, #habit-input:focus {
+    outline: none;
+    border-color: #ea9999;
+    box-shadow: 0 0 0 2px #ea9999;
+}
+
+#submit-goal, #submit-habit {
+    width: 140px;
+    height: 40px;
+    font-size: 1.1rem;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #76A5AF 0%, #014240 100%);
+    color: #fff;
+    font-weight: 600;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    border: none;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#submit-goal:hover, #submit-habit:hover {
+    background: linear-gradient(90deg, #014240 0%, #76A5AF 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+#add-goal-overlay, #add-habit-overlay {
     position: fixed;
     display: none;
-    background-color: rgba(0, 0, 0, 0.701);
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    animation: overlayFadeIn 0.2s ease forwards;
 }
 
-#add-goal-form{
-    position: relative;
-    align-items: center;
-    background-color: #ea9999;
-    border: 3px solid #014240;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 200px;
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-#add-goal-form > h6 {
-    font-family: Wix Made for Display;
-    font-weight: 100;
-    color: #000000;
-    position: relative;
-    text-align: center;
-    font-size: 80px;
-}
-
-#goal-input{
-    position: relative;
-    width: 90%;
-    align-items: center;
-    height: 50px;
-    border: 3px solid #014240;
-    border-radius: 20px;
-    padding: 20px;
-    font-family: Wix Madefor Display;
+#close-form, #close-habit-form {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
     color: #014240;
-    font-size: 40px;
-    left: 5%;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    font-family: 'Wix Madefor Display', sans-serif;
+    transform: rotate(0deg);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    line-height: 1;
 }
 
-#submit-goal{
-    margin: 30px;
-    left: 40%;
-    position: relative;
-    width: 150px;
-    text-align: center;
-    align-items: center;
-    height: 70px;
-    background-color: #014240;
-    color: #ffffff;
-    font-size: 40px;
-    border-radius: 20px;
+#close-form:hover, #close-habit-form:hover {
+    color: #EA9999;
+    transform: rotate(90deg);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(234, 153, 153, 0.3);
+}
+
+#goals {
+    height: auto;
+    min-height: 300px;
+    width: 100%;
+    background-color: #BFD4D9;
     border: 3px solid #014240;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#habits-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+#habits-header-text {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #014280;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+    text-shadow: 0 1px 2px rgba(20, 66, 128, 0.08);
+    display: block;
+    background: none;
+    position: relative;
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#clear-all-habits-button {
+    position: relative;
+    border: none;
+    background: none;
     cursor: pointer;
+    font-family: 'Wix Madefor Display', sans-serif;
+    color: #014240;
+    font-size: 16px;
+    padding: 8px 18px;
+    border-radius: 12px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#clear-all-habits-button:hover {
+    background-color: #76A5AF;
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+#habits-list-container {
+    position: relative;
+    padding: 20px;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 400px;
+    background-color: transparent;
+    border-radius: 10px;
+    overflow-x: hidden;
+    padding: 0 10px;
+}
+
+#habits-list {
+    list-style-position: inside;
+    padding: 0;
+    width: 100%;
+}
+
+#habits {
+    height: auto;
+    min-height: 300px;
+    width: 100%;
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#close-habit-form {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
+    color: #014240;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    font-family: 'Wix Madefor Display', sans-serif;
+    transform: rotate(0deg);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    line-height: 1;
+}
+
+#close-habit-form:hover {
+    color: #EA9999;
+    transform: rotate(90deg);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(234, 153, 153, 0.3);
+}
+
+#add-habit-form > h6 {
+    font-family: 'DynaPuff', cursive, 'Wix Madefor Display', sans-serif !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    color: #014240;
+    margin-bottom: 18px;
+    margin-top: 0;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Step 3: Consistent button styles */
+button, .login-button, #logout-button, #clear-all-button, #clear-all-habits-button, #add-goal-button, #add-habit-button, #submit-goal, #submit-habit, .delete-btn, .revert-button, .change-mood-btn, .mood-btn, .mood-option, .reminder-popup button {
+    border-radius: 12px;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 16px;
+    padding: 8px 18px;
+    border: none;
+    background-color: #014240;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+button:hover, .login-button:hover, #logout-button:hover, #clear-all-button:hover, #clear-all-habits-button:hover, #add-goal-button:hover, #add-habit-button:hover, #submit-goal:hover, #submit-habit:hover, .delete-btn:hover, .revert-button:hover, .change-mood-btn:hover, .mood-btn:hover, .mood-option:hover, .reminder-popup button:hover {
+    background-color: #76A5AF;
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Accent for delete and warning buttons */
+.delete-btn, .revert-button, .change-mood-btn {
+    background-color: #EA9999;
+    color: #014240;
+}
+
+.delete-btn:hover, .revert-button:hover, .change-mood-btn:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+    }
+
+.topbar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px 40px 0 0;
+    position: relative;
+    z-index: 10;
+    background: transparent;
+}
+
+#logout-button {
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 900px) {
+    .dashboard-item {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .dashboard-item > div, .Stats-item > div, .Leaderboard-item, .Quote, #mood-container, #suggestions-container, #habits, #goals {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    #habits, #goals {
+        margin: 0 0 0 0;
+}
+    .habits-goals-row {
+        flex-direction: row;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 500px) {
+    #add-goal-form, #add-habit-form {
+        max-width: 95vw;
+        padding: 8px;
+    }
+    #add-goal-form > h6, #add-habit-form > h6 {
+        font-size: 1rem;
+    }
+}
+
+h1, #logo, #welcome {
+    font-family: 'DynaPuff', cursive, 'Wix Madefor Display', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #014240;
+    letter-spacing: 1px;
+    margin-bottom: 0.5em;
+}
+
+h6, .stats-title, #goal-header-text, #habits-header-text, .dashboard-item > div > h6, .Stats-item > div > h6, .Leaderboard-item > div > h6 {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a73e8;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+}
+
+.stats-grid .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #EA9999;
+    letter-spacing: 0.5px;
+}
+
+.dashboard-item, .Stats-item, .Leaderboard-item, .Quote, #mood-container, #suggestions-container, #habits, #goals, body, p, li, .suggestions-list p {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #014240;
+}
+
+.suggestions-list p {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #014240;
+}
+
+/* Centered section titles with accent underline */
+.dashboard-item > div > h6, .Stats-item > div > h6, .Leaderboard-item > div > h6 {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #014280;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+    text-shadow: 0 1px 2px rgba(20, 66, 128, 0.08);
+    position: relative;
+    text-align: center;
+}
+
+.dashboard-item > div > h6::after, .Stats-item > div > h6::after, .Leaderboard-item > div > h6::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    margin: 6px auto 0 auto;
+    background: linear-gradient(90deg, #76A5AF 0%, #014280 100%);
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+/* Left-aligned headers with true underline */
+#goal-header-text, #habits-header-text {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #014280;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7em;
+    margin-top: 0.2em;
+    text-shadow: 0 1px 2px rgba(20, 66, 128, 0.08);
+    display: block;
+    background: none;
+    position: relative;
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#goal-header-text::after, #habits-header-text::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    margin: 6px auto 0 auto;
+    background: linear-gradient(90deg, #76A5AF 0%, #014280 100%);
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+/* Accessibility: Focus and Active States for Interactive Elements */
+button:focus-visible, .login-button:focus-visible, #logout-button:focus-visible, #clear-all-button:focus-visible, #clear-all-habits-button:focus-visible, #add-goal-button:focus-visible, #add-habit-button:focus-visible, #submit-goal:focus-visible, #submit-habit:focus-visible, .delete-btn:focus-visible, .revert-button:focus-visible, .change-mood-btn:focus-visible, .mood-btn:focus-visible, .mood-option:focus-visible, .reminder-popup button:focus-visible, input[type="text"]:focus-visible, li:focus-visible {
+    outline: 3px solid #1a73e8;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.18);
+    z-index: 10;
+}
+
+button:active, .login-button:active, #logout-button:active, #clear-all-button:active, #clear-all-habits-button:active, #add-goal-button:active, #add-habit-button:active, #submit-goal:active, #submit-habit:active, .delete-btn:active, .revert-button:active, .change-mood-btn:active, .mood-btn:active, .mood-option:active, .reminder-popup button:active {
+    filter: brightness(0.92);
+    transform: scale(0.97);
+}
+
+input[type="text"]:focus-visible {
+    outline: 3px solid #1a73e8;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.18);
+}
+
+li[tabindex]:focus-visible, #goal-list li:focus-visible, #habits-list li:focus-visible {
+    outline: 3px solid #1a73e8;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.18);
+    background-color: #e3f0fa !important;
+}
+
+/* Reflection Section Styles */
+#reflection {
+    height: 100%;
+    min-height: 300px;
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#reflection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px 4px 16px;
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    position: relative;
+    min-height: 48px;
+}
+
+#reflection-header-text {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #014280;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+    text-shadow: 0 1px 2px rgba(20, 66, 128, 0.08);
+    display: block;
+    background: none;
+    position: relative;
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#reflection-header-text::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    margin: 4px auto 0 auto;
+    background: linear-gradient(90deg, #76A5AF 0%, #014280 100%);
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+#reflection-container {
+    padding: 10px 0 12px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+#reflection-input {
+        width: 100%;
+    max-width: 420px;
+    min-width: 220px;
+    min-height: 100px;
+    padding: 10px 12px;
+    border: 2px solid #76A5AF;
+    border-radius: 14px;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1rem;
+    color: #014240;
+    background-color: rgba(255, 255, 255, 0.7);
+    resize: vertical;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+#reflection-input:focus {
+    outline: none;
+    border-color: #ea9999;
+    box-shadow: 0 0 0 2px rgba(234, 153, 153, 0.2);
+}
+
+#reflection-counter {
+    align-self: flex-end;
+    margin-top: 2px;
+    margin-right: 2px;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 0.9rem;
+    color: #014240;
+    opacity: 0.7;
+    position: static;
+    max-width: 420px;
+    width: 100%;
+    text-align: right;
+    }
+
+#save-reflection-button {
+    background: linear-gradient(90deg, #76A5AF 0%, #014240 100%);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-left: 12px;
+    min-width: 70px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#save-reflection-button:hover {
+    background: linear-gradient(90deg, #014240 0%, #76A5AF 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+#save-reflection-button:focus-visible {
+    outline: 3px solid #1a73e8;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.18);
+}
+
+#save-reflection-button:active {
+    filter: brightness(0.92);
+    transform: scale(0.97);
+}
+
+.dashboard-row {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    width: 100%;
+    margin-bottom: 32px;
+    margin-top: 0;
+    justify-content: center;
+    align-items: stretch;
+}
+.dashboard-row:last-child {
+    margin-bottom: 0;
+}
+.top-row > div, .bottom-row > div {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* Remove .habits-goals-row styles if present */
+.habits-goals-row { display: none !important; }
+
+@media (max-width: 900px) {
+    .dashboard-row {
+        gap: 16px;
+    }
+}
+
+#mood-container, #suggestions-container {
+    background-color: #BFD4D9;
+    padding: 16px;
+    border: 3px solid #014240;
+    border-radius: 15px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    min-height: 300px;
+    display: block;
+}
+
+/* Achievement Badges Section */
+#badges {
+    background: linear-gradient(135deg, #fdf6f0 70%, #e3f6f5 100%);
+    border: 3px solid #76A5AF;
+    border-radius: 22px !important;
+    box-shadow: 0 6px 24px rgba(118, 165, 175, 0.13);
+    margin: 0;
+    padding: 28px 18px 32px 18px;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+}
+#badges-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+#badges-header-text {
+    font-family: 'DynaPuff', cursive, 'Wix Madefor Display', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #EA9999;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3em;
+    margin-top: 0.2em;
+    text-shadow: 0 2px 8px rgba(234, 153, 153, 0.10);
+    position: relative;
+    display: inline-block;
+}
+#badges-header-text::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: 7px auto 0 auto;
+    background: linear-gradient(90deg, #76A5AF 0%, #EA9999 100%);
+    border-radius: 2px;
+    opacity: 0.6;
+}
+#badges-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 32px 28px;
+    width: 100%;
+    justify-items: center;
+    align-items: start;
+    margin-top: 18px;
+}
+.badge {
+    background: linear-gradient(135deg, #fff7e8 60%, #bfe3e0 100%);
+    border: 3px solid #76A5AF;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 18px 0 rgba(118, 165, 175, 0.13), 0 0 0 8px #fff7e8cc;
+    position: relative;
+    transition: transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    overflow: visible;
+    margin-bottom: 0;
+}
+.badge:hover:not(.locked) {
+    transform: scale(1.10) rotate(-2deg);
+    box-shadow: 0 8px 28px rgba(234, 153, 153, 0.18), 0 0 0 12px #e3f6f5cc;
+    border-color: #EA9999;
+}
+.badge-emoji {
+    font-size: 2.3rem;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 4px #fff7e8);
+    z-index: 2;
+}
+.badge-label {
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.05rem;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 auto 0 auto;
+    text-shadow: 0 1px 2px #014240, 0 2px 8px #76A5AF44;
+    line-height: 1.2;
+    display: block;
+    width: 80%;
+    word-break: break-word;
+    background: linear-gradient(90deg, #76A5AF 0%, #EA9999 100%);
+    border-radius: 18px;
+    padding: 6px 10px 5px 10px;
+    box-shadow: 0 2px 8px #bfe3e044;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+    border: 1.5px solid #fff7e8;
+    opacity: 0.97;
+    z-index: 2;
+}
+.badge.locked {
+    opacity: 0.55;
+    filter: grayscale(0.8) blur(0.5px) brightness(1.08);
+    border-style: dashed;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #e3e3e3 60%, #e0e7ef 100%);
+    box-shadow: 0 2px 8px #e0e7ef44;
+}
+.badge.locked .badge-emoji {
+    filter: grayscale(1) blur(1.5px) drop-shadow(0 1px 2px #fff7e8);
+}
+.badge.locked .badge-label {
+    color: #eee;
+    background: linear-gradient(90deg, #bfc9d9 0%, #e0e7ef 100%);
+    border: 1.5px dashed #bfc9d9;
+    opacity: 0.85;
+    }
+.badge.locked::after {
+    content: '\1F512'; /* Unicode lock emoji */
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1.1rem;
+    color: #bfc9d9;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* --- LOGIN PAGE STYLES --- */
+body.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #bfe3e0 0%, #fff7e8 100%);
+    background-image: url('src/images/lyf180_Background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+}
+
+.login-form, .signup-form {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(118, 165, 175, 0.18);
+    padding: 38px 36px 28px 36px;
+    min-width: 320px;
+    max-width: 350px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    transition: box-shadow 0.2s;
+}
+
+.login-form h2, .signup-form h2 {
+    font-family: 'DynaPuff', cursive, 'Wix Madefor Display', sans-serif;
+    color: #014240;
+    font-size: 2rem;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.login-form input, .signup-form input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 2px solid #76A5AF;
+    font-family: 'Wix Madefor Display', sans-serif;
+    font-size: 1.1rem;
+    color: #014240;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(234,153,153,0.08);
+    margin-bottom: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form input:focus, .signup-form input:focus {
+    outline: none;
+    border-color: #ea9999;
+    box-shadow: 0 0 0 2px #ea9999;
+}
+
+.login-button {
+    width: 100%;
+    height: 44px;
+    font-size: 1.1rem;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #76A5AF 0%, #014240 100%);
+    color: #fff;
+    font-weight: 600;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    border: none;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.login-button:hover {
+    background: linear-gradient(90deg, #014240 0%, #76A5AF 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.signup-link {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 1rem;
+    color: #014240;
+}
+
+.signup-link a {
+    color: #EA9999;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+.signup-link a:hover {
+    color: #76A5AF;
+    text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+    .login-form, .signup-form {
+        min-width: 90vw;
+        max-width: 98vw;
+        padding: 18px 6vw 18px 6vw;
+    }
+}
+
+.completion-popup {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    z-index: 2000;
+    background: linear-gradient(135deg, #fff7e8 60%, #bfe3e0 100%);
+    border: 2.5px solid #76A5AF;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(118, 165, 175, 0.18);
+    padding: 22px 32px 18px 32px;
+    min-width: 260px;
+    max-width: 90vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, bottom 0.2s;
+}
+
+.completion-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    bottom: 60px;
+}
+
+.completion-popup .revert-button {
+    margin-top: 14px;
+    background: #EA9999;
+    color: #014240;
+    border-radius: 12px;
+    font-weight: bold;
+    padding: 8px 18px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.completion-popup .revert-button:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+.completion-popup .expiration-bar {
+    width: 100%;
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    margin: 12px 0 0 0;
+    overflow: hidden;
+}
+
+.completion-popup .expiration-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #76A5AF 0%, #EA9999 100%);
+    width: 100%;
+    animation: countdown 5s linear forwards;
+}
+
+@keyframes countdown {
+    from { width: 100%; }
+    to { width: 0%; }
 }
