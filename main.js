@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const BACKEND_URL = "https://cs180-lyf180-project.onrender.com";
 
 // Logout function
@@ -94,6 +93,46 @@ async function saveCurrentUser(userData) {
     }
 }
 
+async function fetchQuotes() {
+    try {
+        const response = await fetch('quotes.csv');
+        const text = await response.text();
+        const quotes = parseQuotesCSV(text);
+        return quotes;
+    } catch (error) {
+        console.error('Error fetching quotes:', error);
+        return [];
+    }
+}
+
+// Function to parse CSV text into an array of quotes
+function parseQuotesCSV(csvText) {
+    const lines = csvText.split('\n').slice(1); // Skip header
+    const quotes = lines.map(line => {
+        const [author, text] = line.split('","').map(s => s.replace(/"/g, ''));
+        return { author, text };
+    }).filter(quote => quote.author && quote.text); // Filter out invalid quotes
+    return quotes;
+}
+
+// Function to get a random quote
+function getRandomQuote(quotes) {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    return quotes[randomIndex];
+}
+
+// Fetch and display a random quote
+async function displayRandomQuote() {
+    const quotes = await fetchQuotes();
+    if (quotes.length > 0) {
+        const randomQuote = getRandomQuote(quotes);
+        const quoteElement = document.getElementById('test-quote');
+        if (quoteElement) {
+            quoteElement.textContent = `"${randomQuote.text}" -- ${randomQuote.author}`;
+        }
+    }
+}
+
 // Load user data
 async function loadUserData() {
     try {
@@ -160,21 +199,7 @@ async function loadUserData() {
         renderBadges();
 
         // Fetch and display quote
-        try {
-            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
-            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
-            const quoteData = await quoteResponse.json();
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = quoteData.quote || quoteData.error;
-            }
-        } catch (error) {
-            console.error('Error fetching quote:', error);
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = "Every day is a new beginning.";
-            }
-        }
+        await displayRandomQuote();
 
         // Initialize reminders
         if (user.reminders) {
@@ -489,19 +514,10 @@ function showError(formId, message) {
             errorDiv.remove();
         }
     }, 3000);
-=======
-function on() {
-    document.getElementById("add-goal-overlay").style.display = "block";
-}
-
-function off() {
-    document.getElementById("add-goal-overlay").style.display = "none";
->>>>>>> main
 }
 
 function addGoal() {
     const goalInput = document.getElementById("goal-input").value;
-<<<<<<< HEAD
     if (!goalInput.trim()) {
         showError('add-goal-form', 'Please enter a goal before submitting');
         return;
@@ -546,39 +562,11 @@ function addHabit() {
 
     document.getElementById("habit-input").value = "";
     offHabit(); // Only close the form if submission was successful
-=======
-    const goalList = document.getElementById("goal-list");
-    const goalItem = document.createElement("li");
-    goalItem.textContent = goalInput;
-
-    const deleteButton = document.createElement("button");
-    const deleteIcon = document.createElement("img");
-    deleteIcon.src = "src/images/trashIcon.png";
-    deleteIcon.alt = "delete";
-    deleteButton.style.width = "10px";
-    deleteButton.style.height = "10px";
-    deleteButton.style.border = "none";
-    deleteButton.style.background = "none";
-    deleteButton.style.cursor = "pointer";
-    deleteButton.style.position = "relative";
-    deleteButton.style.left = "10px";
-    deleteButton.style.top = "5px";
-    deleteButton.appendChild(deleteIcon);
-
-    deleteButton.onclick = () => {
-        goalList.removeChild(goalItem);
-    };
-
-    goalItem.appendChild(deleteButton);
-    goalList.appendChild(goalItem);
-    document.getElementById("goal-input").value = "";
->>>>>>> main
 }
 
 function clearGoals() {
     const goalList = document.getElementById("goal-list");
     goalList.innerHTML = "";
-<<<<<<< HEAD
     
     // Clear goals in user data
     const user = getCurrentUser();
@@ -1052,21 +1040,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Fetch and display quote
-        try {
-            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
-            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
-            const quoteData = await quoteResponse.json();
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = quoteData.quote || quoteData.error;
-            }
-        } catch (err) {
-            console.error('Error fetching quote:', err);
-            const el = document.getElementById("test-quote");
-            if (el) {
-                el.textContent = "Couldn't load quote.";
-            }
-        }
+         await displayRandomQuote();
 
         // Initialize mood tracking
         const user = await getCurrentUser();
@@ -1105,6 +1079,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         console.error('Error during initialization:', error);
     }
 });
+
 
 // Reflection functionality
 // Add a dropdown for previous reflections
@@ -1583,8 +1558,3 @@ document.addEventListener('DOMContentLoaded', function() {
     renderBadges();
 });
   
-=======
-}
-
-
->>>>>>> main

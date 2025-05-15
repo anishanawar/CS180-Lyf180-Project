@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 html {
     font-size: 15px;
 }
@@ -34,6 +37,7 @@ body::before {
     text-align: center;
 }
 
+<<<<<<< HEAD
 =======
 body {
     background-image: url(src/images/lyf180_Background.png);
@@ -49,15 +53,21 @@ body {
     margin: 0;
 }
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 #blueLogo {
     position: relative;
     color: #76A5AF;
     font-family: pacifico;
 <<<<<<< HEAD
+<<<<<<< HEAD
     font-size: 2.5rem;
 =======
     font-size: 60px;
 >>>>>>> main
+=======
+    font-size: 2.5rem;
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
 
 #pinkLogo {
@@ -65,10 +75,14 @@ body {
     color: #EA9999;
     font-family: pacifico;
 <<<<<<< HEAD
+<<<<<<< HEAD
     font-size: 1.7rem;
 =======
     font-size: 40px;
 >>>>>>> main
+=======
+    font-size: 1.7rem;
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
 
 .header {
@@ -77,6 +91,9 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 .Quote {
     font-family: 'Wix Madefor Display', sans-serif;
     font-size: 1.1rem;
@@ -107,6 +124,7 @@ body {
 .dashboard {
     font-size: 1.5rem;
     margin: 16px;
+<<<<<<< HEAD
 =======
 .Quote{
     font-family: Wix Madefor Display;
@@ -125,12 +143,17 @@ body {
     font-size: 40px;
     margin: 30px;
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     background-color: #FFF7E8;
 }
 
 .dashboard-item {
     display: grid;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     gap: 24px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding: 10px;
@@ -147,31 +170,42 @@ body {
     justify-content: unset;
     position: relative;
     z-index: 1;
+<<<<<<< HEAD
 =======
     gap: 40px;
     grid-template-columns: auto auto;
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
 
 .Stats-item {
     display: grid;
 <<<<<<< HEAD
+<<<<<<< HEAD
     grid-template-columns: auto;
 =======
     grid-template-columns: auto
 >>>>>>> main
+=======
+    grid-template-columns: auto;
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
 
 .Stats-item > div {
     background-color: #BFD4D9;
     border: 3px solid #014240;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     border-radius: 15px !important;
     padding: 20px;
     margin: 0;
 }
 
 .Stats-item > div > h6 {
+<<<<<<< HEAD
 =======
     border-radius: 10px;
     padding: 20px;
@@ -197,6 +231,8 @@ body {
 
 .dashboard-item > div > h6 {
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     font-family: Wix Madefor Display;
     color: #014240;
     position: relative;
@@ -207,6 +243,9 @@ body {
     align-items: center;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 
 .dashboard-item > div {
     background-color: #BFD4D9;
@@ -238,6 +277,7 @@ body {
 }
 
 #add-goal {
+<<<<<<< HEAD
 =======
 #quotes{
     height: 250px;
@@ -255,6 +295,8 @@ body {
 
 #add-goal{
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     position: relative;
 }
 
@@ -264,6 +306,9 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 #welcome {
     font-family: 'DynaPuff', cursive;
     color: #014240;
@@ -271,6 +316,7 @@ body {
     font-size: 2rem;
     margin: 10px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
 =======
 
 #welcome {
@@ -280,6 +326,8 @@ body {
     font-size: 30px;
     font-size: 50px;
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
 
 #habits > img {
@@ -291,6 +339,9 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 #goal-header {
     display: flex;
     justify-content: space-between;
@@ -496,6 +547,7 @@ body {
     position: fixed;
     display: none;
     background-color: rgba(0, 0, 0, 0.7);
+<<<<<<< HEAD
 =======
 #goal-header{
     display: flex;
@@ -544,12 +596,17 @@ body {
     display: none;
     background-color: rgba(0, 0, 0, 0.701);
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
     backdrop-filter: blur(5px);
     opacity: 0;
     animation: overlayFadeIn 0.2s ease forwards;
@@ -1417,7 +1474,199 @@ body.login-page {
 @keyframes countdown {
     from { width: 100%; }
     to { width: 0%; }
+<<<<<<< HEAD
 =======
+=======
+}
+body {
+    background-image: url(src/images/lyf180_Background.png);
+    background-color: #FFF7E8;
+}
+
+.container {
+    background-image: url(src/images/lyf180_Background.png);
+
+}
+
+#logo{
+    margin: 0;
+}
+#blueLogo {
+    position: relative;
+    color: #76A5AF;
+    font-family: pacifico;
+    font-size: 60px;
+}
+
+#pinkLogo {
+    position: relative;
+    color: #EA9999;
+    font-family: pacifico;
+    font-size: 40px;
+}
+
+.header {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+.Quote{
+    font-family: Wix Madefor Display;
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+}
+
+#test-quote{
+    margin: 0;
+}
+.main {
+    padding-top: 30px;
+}
+.dashboard {
+    font-size: 40px;
+    margin: 30px;
+    background-color: #FFF7E8;
+}
+
+.dashboard-item {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: auto auto;
+}
+
+.Stats-item {
+    display: grid;
+    grid-template-columns: auto
+}
+
+.Stats-item > div {
+    background-color: #BFD4D9;
+    border: 3px solid #014240;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.Stats-item > div > h6 {
+        font-family: Wix Madefor Display;
+        color: #014240;
+        position: relative;
+        margin: 0;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.dashboard-item > div {
+    background-color: #BFD4D9;
+    padding: 20px;
+    border: 3px solid #014240;
+    border-radius: 10px;
+}
+
+.dashboard-item > div > h6 {
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#quotes{
+    height: 250px;
+}
+
+#habits{
+    height: 300px;
+    width: 700px;
+}
+
+#goals{
+    height: 300px;
+    width: 700px;
+}
+
+#add-goal{
+    position: relative;
+}
+
+#stats {
+    grid-column: 1 / 4;
+    height: 300px;
+}
+
+
+#welcome {
+    font-family: DynaPuff;
+    color: #014240;
+    position: relative;
+    font-size: 30px;
+    font-size: 50px;
+}
+
+#habits > img {
+    position: absolute;
+    top: 220px;
+    left: 383px;
+    width: 30px;
+    height: 30px;
+}
+
+#goal-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#goal-header-text{
+    font-family: Wix Madefor Display;
+    color: #014240;
+    position: relative;
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#add-goal-button{
+    position: relative;
+    border: none;
+    left: 200px;
+    background: none;
+    cursor: pointer;
+}
+#add-goal-icon{
+    border: none;
+    display: block;
+    position: relative;
+    height: 60px;
+    width: 60px;
+}
+
+#goal-list-container{
+    position: relative;
+    padding-bottom: 20px;
+    overflow-y: auto;
+    width: 600px;
+    height: 200px;
+    
+}
+
+#add-goal-overlay{
+    position: fixed;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.701);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
 
 #add-goal-form{
@@ -1467,5 +1716,8 @@ body.login-page {
     border-radius: 20px;
     border: 3px solid #014240;
     cursor: pointer;
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> 862487ab9c41d12ebe222de81b00cc257d0f7e27
 }
