@@ -221,7 +221,7 @@ function updateStatsDisplay(stats) {
 
     statsDiv.innerHTML = `
         <div class="stats-container">
-            <h6 class="stats-title">Your Progress</h6>
+            <h6 class="stats-title">Your Stats</h6>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">🎯</div>

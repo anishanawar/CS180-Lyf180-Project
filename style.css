@@ -196,7 +196,7 @@ body::before {
     position: relative;
 }
 
-#goal-header-text {
+/* #goal-header-text {
     font-family: 'Wix Madefor Display', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
@@ -211,7 +211,7 @@ body::before {
     text-align: center;
     border-bottom: none;
     padding-bottom: 0;
-}
+} */
 
 #add-goal-button, #add-habit-button {
     width: 48px;
@@ -223,7 +223,13 @@ body::before {
     margin-right: 20px;
 }
 
-#add-goal-icon, #add-habit-icon {
+#add-goal-icon {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+#add-habit-icon {
     width: 32px;
     height: 32px;
     display: block;
@@ -461,11 +467,11 @@ body::before {
     position: relative;
 }
 
-#habits-header-text {
+.header-text {
     font-family: 'Wix Madefor Display', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #014280;
+    color: #014240;
     letter-spacing: 0.5px;
     margin-bottom: 0.7em;
     margin-top: 0.2em;
@@ -712,7 +718,7 @@ h6, .stats-title, #goal-header-text, #habits-header-text, .dashboard-item > div 
 }
 
 /* Left-aligned headers with true underline */
-#goal-header-text, #habits-header-text {
+/* #goal-header-text, #habits-header-text {
     font-family: 'Wix Madefor Display', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
@@ -727,7 +733,7 @@ h6, .stats-title, #goal-header-text, #habits-header-text, .dashboard-item > div 
     text-align: center;
     border-bottom: none;
     padding-bottom: 0;
-}
+} */
 
 #goal-header-text::after, #habits-header-text::after {
     content: '';
@@ -1397,12 +1403,6 @@ body {
     left: 383px;
     width: 30px;
     height: 30px;
-}
-
-#goal-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #goal-header-text{
