@@ -256,11 +256,6 @@ body::before {
     box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-#goal-list-container, #habits-list-container {
-    padding: 0;
-    overflow: hidden;
-    border-radius: 10px;
-}
 
 #goal-list li, #habits-list li {
     box-sizing: border-box;
@@ -507,14 +502,12 @@ body::before {
 
 #habits-list-container {
     position: relative;
-    padding: 20px;
+    padding-bottom: 20px;
     overflow-y: auto;
-    width: 100%;
-    max-height: 400px;
-    background-color: transparent;
-    border-radius: 10px;
-    overflow-x: hidden;
-    padding: 0 10px;
+    width: 540px;
+    height: 190px;
+    left: 2px;
+    bottom: 10px;
 }
 
 #habits-list {
@@ -1436,8 +1429,10 @@ body {
     position: relative;
     padding-bottom: 20px;
     overflow-y: auto;
-    width: 600px;
-    height: 200px;
+    width: 540px;
+    height: 190px;
+    right: 40px;
+    bottom: 10px;
     
 }
 
