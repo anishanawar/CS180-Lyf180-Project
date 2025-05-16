@@ -1425,11 +1425,11 @@ body {
     width: 60px;
 }
 
-#goal-list-container{
+#goals-list-container{
     position: relative;
     padding-bottom: 20px;
     overflow-y: auto;
-    width: 540px;
+    width: 580px;
     height: 190px;
     right: 40px;
     bottom: 10px;
@@ -1495,3 +1495,58 @@ body {
     border: 3px solid #014240;
     cursor: pointer;
 }
+
+/* For WebKit browsers (Chrome, Safari) */
+#habits-list-container::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+
+#habits-list-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+    border-radius: 10px; /* Rounded corners for the track */
+}
+
+#habits-list-container::-webkit-scrollbar-thumb {
+    background: #76A5AF; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+#habits-list-container::-webkit-scrollbar-thumb:hover {
+    background: #EA9999; /* Color of the thumb on hover */
+}
+
+/* For Firefox */
+#habits-list-container {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: #76A5AF #f1f1f1; /* thumb color and track color */
+}
+
+
+
+/* For WebKit browsers (Chrome, Safari) */
+#goals-list-container::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+
+#goals-list-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+    border-radius: 10px; /* Rounded corners for the track */
+}
+
+#goals-list-container::-webkit-scrollbar-thumb {
+    background: #76A5AF; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+#goals-list-container::-webkit-scrollbar-thumb:hover {
+    background: #EA9999; /* Color of the thumb on hover */
+}
+
+/* For Firefox */
+#goals-list-container {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: #76A5AF #f1f1f1; /* thumb color and track color */
+}
+
