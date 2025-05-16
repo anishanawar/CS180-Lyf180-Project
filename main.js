@@ -1188,7 +1188,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Track which achievement popups have been shown in this session
 const sessionShownBadges = new Set();
-
 function renderBadges() {
     const badgesList = document.getElementById('badges-list');
     if (!badgesList) {
@@ -1198,6 +1197,7 @@ function renderBadges() {
     
     badgesList.innerHTML = '';
     
+    //badges 
     const badgeDefs = [
         { key: 'firstGoal', label: 'First Goal!', emoji: '🌱', desc: 'Complete your first goal', check: user => user.stats && user.stats.goalsCompleted >= 1 },
         { key: 'goal5', label: '5 Goals!', emoji: '🎯', desc: 'Complete 5 goals', check: user => user.stats && user.stats.goalsCompleted >= 5 },
@@ -1205,7 +1205,7 @@ function renderBadges() {
         { key: 'habit10', label: '10 Habits!', emoji: '🌟', desc: 'Complete 10 habits', check: user => user.stats && user.stats.habitsCompleted >= 10 },
         { key: 'streak3', label: '3 Day Streak!', emoji: '🔥', desc: '3 day streak', check: user => user.stats && user.stats.streak >= 3 },
         { key: 'streak7', label: '7 Day Streak!', emoji: '🏆', desc: '7 day streak', check: user => user.stats && user.stats.streak >= 7 },
-        { key: 'custom', label: "Amaze-Balls!", emoji: '🦄', desc: 'Just for being you!', check: user => true }
+        { key: 'custom', label: "Amaze-Balls!", emoji: '🦄', desc: 'Just for being you!', check: user => true },
     ];
 
     const user = getCurrentUser();
@@ -1255,7 +1255,8 @@ function renderBadges() {
 }
 
 function showBadgePopup(badge, unlocked) {
-    // Remove any existing popup
+//     // Remove any existing popup
+if(unlocked == true){
     const existing = document.getElementById('badge-popup-overlay');
     if (existing) existing.remove();
     // Create overlay
@@ -1402,6 +1403,7 @@ function showBadgePopup(badge, unlocked) {
         }
     }, 5000);
 }
+}
 
 // Show achievement popup
 function showAchievementPopup(badge) {
@@ -1424,7 +1426,9 @@ function showAchievementPopup(badge) {
     overlay.style.justifyContent = 'center';
     overlay.style.animation = 'fadeIn 0.3s ease forwards';
 
-    // Create popup
+    // Create popup 
+ 
+
     const popup = document.createElement('div');
     popup.className = 'achievement-popup';
     popup.style.background = 'linear-gradient(135deg, #fff7e8 60%, #bfe3e0 100%)';
