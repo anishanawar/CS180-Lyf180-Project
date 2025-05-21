@@ -106,14 +106,14 @@ app.post('/api/analyze-journal', async (req, res) => {
         Journal Entry: "${journalEntry}"
         Current Mood: ${mood}
         
-        Format the response as a JSON array of strings, each containing one suggestion.`;
+        Return ONLY a JSON array of strings, with no markdown formatting or additional text. Example format: ["suggestion 1", "suggestion 2", "suggestion 3"]`;
 
         const completion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
                 {
                     role: "system",
-                    content: "You are a helpful life coach that provides personalized suggestions based on journal entries and moods."
+                    content: "You are a helpful life coach that provides personalized suggestions based on journal entries and moods. Always respond with a valid JSON array of strings, with no markdown formatting or additional text."
                 },
                 {
                     role: "user",
@@ -124,7 +124,11 @@ app.post('/api/analyze-journal', async (req, res) => {
             max_tokens: 150
         });
 
-        const suggestions = JSON.parse(completion.choices[0].message.content);
+        // Clean the response to ensure it's valid JSON
+        const responseText = completion.choices[0].message.content.trim();
+        const cleanResponse = responseText.replace(/```json\n?|\n?```/g, '').trim();
+        const suggestions = JSON.parse(cleanResponse);
+        
         res.json({ suggestions });
     } catch (error) {
         console.error('Error analyzing journal:', error);
