@@ -1294,3 +1294,9 @@ body.login-page {
     scrollbar-color: #76A5AF #f1f1f1; /* thumb color and track color */
 }
 
+
+.mood-option.selected {
+    background-color: #007BFF; /* Change to your desired color */
+    color: white; /* Change text color for better contrast */
+    border: 2px solid #0056b3; /* Optional: add a border */
+}
