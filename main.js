@@ -93,6 +93,46 @@ async function saveCurrentUser(userData) {
     }
 }
 
+async function fetchQuotes() {
+    try {
+        const response = await fetch('quotes.csv');
+        const text = await response.text();
+        const quotes = parseQuotesCSV(text);
+        return quotes;
+    } catch (error) {
+        console.error('Error fetching quotes:', error);
+        return [];
+    }
+}
+
+// Function to parse CSV text into an array of quotes
+function parseQuotesCSV(csvText) {
+    const lines = csvText.split('\n').slice(1); // Skip header
+    const quotes = lines.map(line => {
+        const [author, text] = line.split('","').map(s => s.replace(/"/g, ''));
+        return { author, text };
+    }).filter(quote => quote.author && quote.text); // Filter out invalid quotes
+    return quotes;
+}
+
+// Function to get a random quote
+function getRandomQuote(quotes) {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    return quotes[randomIndex];
+}
+
+// Fetch and display a random quote
+async function displayRandomQuote() {
+    const quotes = await fetchQuotes();
+    if (quotes.length > 0) {
+        const randomQuote = getRandomQuote(quotes);
+        const quoteElement = document.getElementById('test-quote');
+        if (quoteElement) {
+            quoteElement.textContent = `"${randomQuote.text}" -- ${randomQuote.author}`;
+        }
+    }
+}
+
 // Load user data
 async function loadUserData() {
     try {
@@ -159,21 +199,7 @@ async function loadUserData() {
         renderBadges();
 
         // Fetch and display quote
-        try {
-            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
-            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
-            const quoteData = await quoteResponse.json();
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = quoteData.quote || quoteData.error;
-            }
-        } catch (error) {
-            console.error('Error fetching quote:', error);
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = "Every day is a new beginning.";
-            }
-        }
+        await displayRandomQuote();
 
         // Initialize reminders
         if (user.reminders) {
@@ -195,7 +221,7 @@ function updateStatsDisplay(stats) {
 
     statsDiv.innerHTML = `
         <div class="stats-container">
-            <h6 class="stats-title">Your Progress</h6>
+            <h6 class="stats-title">Your Stats</h6>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">🎯</div>
@@ -589,7 +615,7 @@ function handleHabitOverlayClick(event) {
 }
 
 // Add mood tracking
-async function addMood(mood) {
+async function addMood(mood, journalEntry) {
     try {
         const user = getCurrentUser();
         if (!user) {
@@ -626,53 +652,42 @@ async function addMood(mood) {
         // Generate and update suggestions with the new mood
         await generateSuggestions();
         updateSuggestionsDisplay();
+
+        // Update suggestions based on the journal entry
+        await generateSuggestionsFromJournal(journalEntry);
     } catch (error) {
         console.error('Error adding mood:', error);
     }
 }
 
-// Show mood selector
+// Function to show the mood selector and journal entry
 function showMoodSelector(event) {
     // Remove any existing mood selector
     const existingSelector = document.querySelector('.mood-selector');
     if (existingSelector) existingSelector.remove();
 
-    // Try to use the event target (for Change button), else fallback to mood button
-    let anchorBtn = null;
-    if (event && event.target) {
-        anchorBtn = event.target;
-    } else {
-        anchorBtn = document.querySelector('.mood-btn');
-    }
+    // Create mood selector
     const moodSelector = document.createElement('div');
     moodSelector.className = 'mood-selector';
     moodSelector.innerHTML = `
         <div class="mood-options">
-            <button onclick="selectMood('Great')" class="mood-option">😊 Great</button>
-            <button onclick="selectMood('Good')" class="mood-option">🙂 Good</button>
-            <button onclick="selectMood('Okay')" class="mood-option">😐 Okay</button>
-            <button onclick="selectMood('Bad')" class="mood-option">😔 Bad</button>
-            <button onclick="selectMood('Terrible')" class="mood-option">😢 Terrible</button>
+            <button onclick="selectMood('Great', this)" class="mood-option">😊 Great</button>
+            <button onclick="selectMood('Good', this)" class="mood-option">🙂 Good</button>
+            <button onclick="selectMood('Okay', this)" class="mood-option">😐 Okay</button>
+            <button onclick="selectMood('Bad', this)" class="mood-option">😔 Bad</button>
+            <button onclick="selectMood('Terrible', this)" class="mood-option">😢 Terrible</button>
         </div>
+        <textarea id="journal-entry" placeholder="Write your journal entry here..."></textarea>
+        <button id="submit-mood" onclick="submitMoodAndJournal(), closeMoodSelector()">Submit</button>
     `;
 
-    if (anchorBtn) {
-        // Position the selector right below the button
-        const rect = anchorBtn.getBoundingClientRect();
-        moodSelector.style.position = 'absolute';
-        moodSelector.style.left = rect.left + window.scrollX + 'px';
-        moodSelector.style.top = rect.bottom + window.scrollY + 8 + 'px';
-        moodSelector.style.zIndex = 2000;
-        document.body.appendChild(moodSelector);
-    } else {
-        // Fallback: center on screen
-        moodSelector.style.position = 'fixed';
-        moodSelector.style.top = '50%';
-        moodSelector.style.left = '50%';
-        moodSelector.style.transform = 'translate(-50%, -50%)';
-        moodSelector.style.zIndex = 2000;
-        document.body.appendChild(moodSelector);
-    }
+    // Position the selector
+    const rect = event.target.getBoundingClientRect();
+    moodSelector.style.position = 'absolute';
+    moodSelector.style.left = rect.left + window.scrollX + 'px';
+    moodSelector.style.top = rect.bottom + window.scrollY + 8 + 'px';
+    moodSelector.style.zIndex = 2000;
+    document.body.appendChild(moodSelector);
 
     // Add click outside handler to close the selector
     setTimeout(() => {
@@ -684,13 +699,98 @@ function showMoodSelector(event) {
         });
     }, 0);
 }
-
-// Helper for mood selection
-async function selectMood(mood) {
-    await addMood(mood);
-    // Remove the mood selector popup
+function closeMoodSelector() {
     const moodSelector = document.querySelector('.mood-selector');
     if (moodSelector) moodSelector.remove();
+}
+// Global variable to store the selected mood
+let selectedMood = '';
+
+// Function to select mood
+function selectMood(mood, button) {
+    selectedMood = mood; // Store the selected mood
+    console.log(`Selected mood: ${selectedMood}`); // Debugging line
+
+    // Remove 'selected' class from all buttons
+    const moodButtons = document.querySelectorAll('.mood-option');
+    moodButtons.forEach(btn => btn.classList.remove('selected'));
+
+    // Add 'selected' class to the clicked button
+    button.classList.add('selected');
+}
+
+// Function to submit mood and journal entry
+async function submitMoodAndJournal() {
+    const journalEntry = document.getElementById("journal-entry").value;
+
+    if (!selectedMood) {
+        console.error('No mood selected');
+        alert('Please select a mood before submitting.');
+        return;
+    }
+
+    if (!journalEntry.trim()) {
+        console.error('No journal entry provided');
+        alert('Please enter a journal entry before submitting.');
+        return;
+    }
+
+    // Update suggestions based on the journal entry
+    await generateSuggestionsFromJournal(journalEntry);
+
+    // Update the suggestions display
+    updateSuggestionsDisplay();
+
+    // Optionally, you can clear the journal entry field after submission
+    document.getElementById("journal-entry").value = '';
+    selectedMood = ''; // Reset the selected mood
+}
+
+function extractKeywords(journalEntry) {
+    // Define a list of common stop words to ignore
+    const stopWords = new Set([
+        'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', 'as', 'at',
+        'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can', 'could',
+        'couldn\'t', 'did', 'didn\'t', 'do', 'does', 'doesn\'t', 'doing', 'don\'t', 'down', 'during', 'each',
+        'few', 'for', 'from', 'further', 'had', 'hadn\'t', 'has', 'hasn\'t', 'have', 'haven\'t', 'he', 'her',
+        'here', 'hers', 'herself', 'him', 'himself', 'his', 'how', 'i', 'if', 'in', 'into', 'is', 'isn\'t',
+        'it', 'its', 'itself', 'just', 'll', 'm', 'ma', 'me', 'might', 'mightn\'t', 'more', 'most', 'must',
+        'mustn\'t', 'my', 'myself', 'needn\'t', 'no', 'nor', 'not', 'now', 'o', 'of', 'off', 'on', 'once',
+        'only', 'or', 'other', 'our', 'ours', 'ourselves', 'out', 'over', 'own', 're', 's', 'same', 'she',
+        'should', 'should\'ve', 'so', 'some', 'such', 't', 'than', 'that', 'the', 'their', 'theirs', 'them',
+        'themselves', 'then', 'there', 'these', 'they', 'this', 'those', 'through', 'to', 'too', 'under',
+        'until', 'up', 've', 'very', 'was', 'wasn\'t', 'we', 'were', 'weren\'t', 'what', 'when', 'where',
+        'which', 'while', 'who', 'whom', 'why', 'will', 'with', 'won\'t', 'would', 'wouldn\'t', 'you',
+        'your', 'yours', 'yourself', 'yourselves'
+    ]);
+
+    // Split the journal entry into words, convert to lowercase, and filter out stop words
+    const words = journalEntry
+        .toLowerCase() // Convert to lowercase
+        .match(/\b\w+\b/g) // Match words (alphanumeric)
+        .filter(word => !stopWords.has(word)); // Filter out stop words
+
+    // Get unique keywords
+    const uniqueKeywords = [...new Set(words)];
+
+    return uniqueKeywords;
+}
+
+// New function to generate suggestions based on journal entry
+async function generateSuggestionsFromJournal(journalEntry) {
+    // Analyze the journal entry and generate suggestions
+    const keywords = extractKeywords(journalEntry); // Assume this function extracts keywords
+    const suggestions = [];
+
+    // Example logic to generate suggestions based on keywords
+    keywords.forEach(keyword => {
+        suggestions.push(`Consider setting a goal related to ${keyword}.`);
+    });
+
+    // Save suggestions to user data
+    const user = getCurrentUser();
+    user.suggestions = suggestions;
+    await saveCurrentUser(user);
 }
 
 // Update mood display
@@ -1014,21 +1114,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Fetch and display quote
-        try {
-            const quoteResponse = await fetch(`${BACKEND_URL}/api/quote`);
-            if (!quoteResponse.ok) throw new Error(`HTTP ${quoteResponse.status}`);
-            const quoteData = await quoteResponse.json();
-            const quoteElement = document.getElementById('test-quote');
-            if (quoteElement) {
-                quoteElement.textContent = quoteData.quote || quoteData.error;
-            }
-        } catch (err) {
-            console.error('Error fetching quote:', err);
-            const el = document.getElementById("test-quote");
-            if (el) {
-                el.textContent = "Couldn't load quote.";
-            }
-        }
+         await displayRandomQuote();
 
         // Initialize mood tracking
         const user = await getCurrentUser();
@@ -1067,6 +1153,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         console.error('Error during initialization:', error);
     }
 });
+
 
 // Reflection functionality
 // Add a dropdown for previous reflections
@@ -1175,7 +1262,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Track which achievement popups have been shown in this session
 const sessionShownBadges = new Set();
-
 function renderBadges() {
     const badgesList = document.getElementById('badges-list');
     if (!badgesList) {
@@ -1185,6 +1271,7 @@ function renderBadges() {
     
     badgesList.innerHTML = '';
     
+    //badges 
     const badgeDefs = [
         { key: 'firstGoal', label: 'First Goal!', emoji: '🌱', desc: 'Complete your first goal', check: user => user.stats && user.stats.goalsCompleted >= 1 },
         { key: 'goal5', label: '5 Goals!', emoji: '🎯', desc: 'Complete 5 goals', check: user => user.stats && user.stats.goalsCompleted >= 5 },
@@ -1192,7 +1279,7 @@ function renderBadges() {
         { key: 'habit10', label: '10 Habits!', emoji: '🌟', desc: 'Complete 10 habits', check: user => user.stats && user.stats.habitsCompleted >= 10 },
         { key: 'streak3', label: '3 Day Streak!', emoji: '🔥', desc: '3 day streak', check: user => user.stats && user.stats.streak >= 3 },
         { key: 'streak7', label: '7 Day Streak!', emoji: '🏆', desc: '7 day streak', check: user => user.stats && user.stats.streak >= 7 },
-        { key: 'custom', label: "Amaze-Balls!", emoji: '🦄', desc: 'Just for being you!', check: user => true }
+        { key: 'custom', label: "Amaze-Balls!", emoji: '🦄', desc: 'Just for being you!', check: user => true },
     ];
 
     const user = getCurrentUser();
@@ -1242,7 +1329,8 @@ function renderBadges() {
 }
 
 function showBadgePopup(badge, unlocked) {
-    // Remove any existing popup
+//     // Remove any existing popup
+if(unlocked == true){
     const existing = document.getElementById('badge-popup-overlay');
     if (existing) existing.remove();
     // Create overlay
@@ -1389,6 +1477,7 @@ function showBadgePopup(badge, unlocked) {
         }
     }, 5000);
 }
+}
 
 // Show achievement popup
 function showAchievementPopup(badge) {
@@ -1411,7 +1500,9 @@ function showAchievementPopup(badge) {
     overlay.style.justifyContent = 'center';
     overlay.style.animation = 'fadeIn 0.3s ease forwards';
 
-    // Create popup
+    // Create popup 
+ 
+
     const popup = document.createElement('div');
     popup.className = 'achievement-popup';
     popup.style.background = 'linear-gradient(135deg, #fff7e8 60%, #bfe3e0 100%)';
