@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const OpenAI = require('openai');
+require('dotenv').config();
 const app = express();
 
 // Middleware
@@ -83,6 +85,51 @@ app.get('/api/quote', (req, res) => {
     ];
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     res.json({ quote: randomQuote });
+});
+
+// OpenAI Configuration
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
+
+// Log API key status (without exposing the actual key)
+console.log('OpenAI API Key Status:', process.env.OPENAI_API_KEY ? 'Present' : 'Missing');
+
+// OpenAI API endpoint for journal analysis
+app.post('/api/analyze-journal', async (req, res) => {
+    try {
+        const { journalEntry, mood } = req.body;
+        
+        const prompt = `Analyze this journal entry and mood, then provide 3 personalized suggestions for goals or habits that would be beneficial. 
+        The suggestions should be specific, actionable, and relevant to the user's current state.
+        
+        Journal Entry: "${journalEntry}"
+        Current Mood: ${mood}
+        
+        Format the response as a JSON array of strings, each containing one suggestion.`;
+
+        const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+                {
+                    role: "system",
+                    content: "You are a helpful life coach that provides personalized suggestions based on journal entries and moods."
+                },
+                {
+                    role: "user",
+                    content: prompt
+                }
+            ],
+            temperature: 0.7,
+            max_tokens: 150
+        });
+
+        const suggestions = JSON.parse(completion.choices[0].message.content);
+        res.json({ suggestions });
+    } catch (error) {
+        console.error('Error analyzing journal:', error);
+        res.status(500).json({ error: 'Failed to analyze journal entry' });
+    }
 });
 
 // API Routes

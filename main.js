@@ -649,12 +649,13 @@ async function addMood(mood, journalEntry) {
         // Update the display
         updateMoodDisplay();
         
-        // Generate and update suggestions with the new mood
-        await generateSuggestions();
+        // Generate suggestions based on the journal entry and mood
+        if (journalEntry && journalEntry.trim()) {
+            await generateSuggestionsFromJournal(journalEntry);
+        } else {
+            await generateSuggestions();
+        }
         updateSuggestionsDisplay();
-
-        // Update suggestions based on the journal entry
-        await generateSuggestionsFromJournal(journalEntry);
     } catch (error) {
         console.error('Error adding mood:', error);
     }
@@ -735,13 +736,10 @@ async function submitMoodAndJournal() {
         return;
     }
 
-    // Update suggestions based on the journal entry
-    await generateSuggestionsFromJournal(journalEntry);
+    // Add the mood and generate suggestions
+    await addMood(selectedMood, journalEntry);
 
-    // Update the suggestions display
-    updateSuggestionsDisplay();
-
-    // Optionally, you can clear the journal entry field after submission
+    // Clear the form
     document.getElementById("journal-entry").value = '';
     selectedMood = ''; // Reset the selected mood
 }
@@ -778,19 +776,39 @@ function extractKeywords(journalEntry) {
 
 // New function to generate suggestions based on journal entry
 async function generateSuggestionsFromJournal(journalEntry) {
-    // Analyze the journal entry and generate suggestions
-    const keywords = extractKeywords(journalEntry); // Assume this function extracts keywords
-    const suggestions = [];
+    try {
+        const response = await fetch(`${BACKEND_URL}/api/analyze-journal`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                journalEntry,
+                mood: selectedMood
+            })
+        });
 
-    // Example logic to generate suggestions based on keywords
-    keywords.forEach(keyword => {
-        suggestions.push(`Consider setting a goal related to ${keyword}.`);
-    });
+        if (!response.ok) {
+            throw new Error('Failed to analyze journal entry');
+        }
 
-    // Save suggestions to user data
-    const user = getCurrentUser();
-    user.suggestions = suggestions;
-    await saveCurrentUser(user);
+        const data = await response.json();
+        
+        // Save suggestions to user data
+        const user = getCurrentUser();
+        user.suggestions = data.suggestions;
+        await saveCurrentUser(user);
+        
+        // Update the suggestions display
+        updateSuggestionsDisplay();
+    } catch (error) {
+        console.error('Error generating suggestions from journal:', error);
+        // Fallback to basic suggestions if API call fails
+        const user = getCurrentUser();
+        user.suggestions = ["Set a new goal or habit to get started!"];
+        await saveCurrentUser(user);
+        updateSuggestionsDisplay();
+    }
 }
 
 // Update mood display
