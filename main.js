@@ -22,6 +22,17 @@ function off() {
     overlay.removeEventListener("click", handleOverlayClick);
 }
 
+// function initStats(stats = {}) {
+//     return {
+//         goalsCompleted: typeof stats.goalsCompleted === 'number' ? stats.goalsCompleted : 0,
+//         habitsCompleted: typeof stats.habitsCompleted === 'number' ? stats.habitsCompleted : 0,
+//         streak: typeof stats.streak === 'number' ? stats.streak : 0,
+//         progressPercent: typeof stats.progressPercent === 'number' ? stats.progressPercent : 0,
+//         totalGoals: typeof stats.totalGoals === 'number' ? stats.totalGoals : 0,
+//         totalHabits: typeof stats.totalHabits === 'number' ? stats.totalHabits : 0,
+//     };
+// }
+
 // Get current user data
 function getCurrentUser() {
     try {
@@ -70,7 +81,7 @@ async function saveCurrentUser(userData) {
             reminders: userData.reminders,
             suggestions: userData.suggestions,
             reflections: userData.reflections,
-            unlockedBadges: userData.unlockedBadges
+            unlockedBadges: userData.unlockedBadges,
         };
 
         const response = await fetch(`${BACKEND_URL}/api/users/${username}`, {
@@ -120,14 +131,30 @@ async function loadUserData() {
         }
         updateHabitsDisplay();
 
-        // Initialize stats
+        // Initialize stats with default values
         if (!user.stats) {
             user.stats = {
                 goalsCompleted: 0,
                 habitsCompleted: 0,
-                streak: 0
+                streak: 0,
+                progressPercent: 0,
+                totalHabits: user.habits.length,
+                totalGoals: user.goals.length
             };
+        } else {
+            // Ensure all stats properties exist and are numbers
+            user.stats.goalsCompleted = Number(user.stats.goalsCompleted) || 0;
+            user.stats.habitsCompleted = Number(user.stats.habitsCompleted) || 0;
+            user.stats.streak = Number(user.stats.streak) || 0;
+            user.stats.progressPercent = Number(user.stats.progressPercent) || 0;
+            // Set totalHabits and totalGoals based on actual arrays length
+            user.stats.totalHabits = user.habits.length;
+            user.stats.totalGoals = user.goals.length;
         }
+
+        // Save the corrected stats
+        await saveCurrentUser(user);
+        updateProgress(user.stats);
         updateStatsDisplay(user.stats);
 
         // Initialize moods
@@ -193,6 +220,23 @@ function updateStatsDisplay(stats) {
     const statsDiv = document.getElementById("stats");
     if (!statsDiv) return;
 
+    // Ensure stats values are numbers
+    stats.totalHabits = Number(stats.totalHabits) || 0;
+    stats.totalGoals = Number(stats.totalGoals) || 0;
+    stats.goalsCompleted = Number(stats.goalsCompleted) || 0;
+    stats.habitsCompleted = Number(stats.habitsCompleted) || 0;
+    stats.streak = Number(stats.streak) || 0;
+    stats.progressPercent = Number(stats.progressPercent) || 0;
+
+    let progressionBar;
+    if (stats.totalHabits === 0 && stats.totalGoals === 0) {
+        progressionBar = `<div class="nothing-done">No habits/goals set yet</div>`;
+    } else {
+        progressionBar = `<div class = "progress-bar">
+        <div class = "fill-bar" style = "width: ${stats.progressPercent}%"></div>
+        </div>`;
+    }
+
     statsDiv.innerHTML = `
         <div class="stats-container">
             <h6 class="stats-title">Your Progress</h6>
@@ -213,6 +257,7 @@ function updateStatsDisplay(stats) {
                     <div class="stat-label">Day Streak</div>
                 </div>
             </div>
+            ${progressionBar}
         </div>
     `;
 
@@ -346,6 +391,7 @@ function showCompletionPopup(itemText, type, itemElement) {
             addHabitClickHandler(habitItem);
             habitList.appendChild(habitItem);
         }
+        updateProgress(user.stats);
         saveCurrentUser(user);
         updateStatsDisplay(user.stats);
         
@@ -381,6 +427,9 @@ function addGoalClickHandler(goalItem) {
         const user = getCurrentUser();
         const goalText = goalItem.querySelector('span').textContent;
         user.goals = user.goals.filter(g => g.text !== goalText);
+        user.stats.totalGoals--;
+        updateProgress(user.stats);
+        updateStatsDisplay(user.stats);
         saveCurrentUser(user);
         
         setTimeout(() => {
@@ -401,6 +450,7 @@ function addGoalClickHandler(goalItem) {
         const user = getCurrentUser();
         user.goals = user.goals.filter(g => g.text !== goalText);
         user.stats.goalsCompleted++;
+        updateProgress(user.stats);
         saveCurrentUser(user);
         
         // Update stats display
@@ -430,6 +480,9 @@ function addHabitClickHandler(habitItem) {
         const user = getCurrentUser();
         const habitText = habitItem.querySelector('span').textContent;
         user.habits = user.habits.filter(h => h.text !== habitText);
+        user.stats.totalHabits--;
+        updateProgress(user.stats);
+        updateStatsDisplay(user.stats);
         saveCurrentUser(user);
         
         setTimeout(() => {
@@ -450,6 +503,7 @@ function addHabitClickHandler(habitItem) {
         const user = getCurrentUser();
         user.habits = user.habits.filter(h => h.text !== habitText);
         user.stats.habitsCompleted++;
+        updateProgress(user.stats);
         saveCurrentUser(user);
         
         // Update stats display
@@ -507,8 +561,28 @@ function addGoal() {
 
     // Save to user data
     const user = getCurrentUser();
+    if (!user.goals) {
+        user.goals = [];
+    }
     user.goals.push({ text: goalInput, completed: false });
+    
+    // Update stats
+    if (!user.stats) {
+        user.stats = {
+            goalsCompleted: 0,
+            habitsCompleted: 0,
+            streak: 0,
+            progressPercent: 0,
+            totalHabits: user.habits ? user.habits.length : 0,
+            totalGoals: 1
+        };
+    } else {
+        user.stats.totalGoals = user.goals.length;
+    }
+    
+    updateProgress(user.stats);
     saveCurrentUser(user);
+    updateStatsDisplay(user.stats);
 
     document.getElementById("goal-input").value = "";
     off(); // Only close the form if submission was successful
@@ -531,8 +605,28 @@ function addHabit() {
 
     // Save to user data
     const user = getCurrentUser();
+    if (!user.habits) {
+        user.habits = [];
+    }
     user.habits.push({ text: habitInput, completed: false });
+    
+    // Update stats
+    if (!user.stats) {
+        user.stats = {
+            goalsCompleted: 0,
+            habitsCompleted: 0,
+            streak: 0,
+            progressPercent: 0,
+            totalHabits: 1,
+            totalGoals: user.goals ? user.goals.length : 0
+        };
+    } else {
+        user.stats.totalHabits = user.habits.length;
+    }
+    
+    updateProgress(user.stats);
     saveCurrentUser(user);
+    updateStatsDisplay(user.stats);
 
     document.getElementById("habit-input").value = "";
     offHabit(); // Only close the form if submission was successful
@@ -544,7 +638,10 @@ function clearGoals() {
     
     // Clear goals in user data
     const user = getCurrentUser();
+    user.stats.totalGoals -= user.goals.length;
     user.goals = [];
+    updateProgress(user.stats);
+    updateStatsDisplay(user.stats);
     saveCurrentUser(user);
 }
 
@@ -554,7 +651,10 @@ function clearHabits() {
     
     // Clear habits in user data
     const user = getCurrentUser();
+    user.stats.totalHabits -= user.habits.length;
     user.habits = [];
+    updateProgress(user.stats);
+    updateStatsDisplay(user.stats);
     saveCurrentUser(user);
 }
 
@@ -904,6 +1004,36 @@ function updateHabitsDisplay() {
         addHabitClickHandler(habitItem);
         habitList.appendChild(habitItem);
     });
+}
+
+function updateProgress(stats) {
+    if (!stats) {
+        console.error('Stats object is undefined');
+        return;
+    }
+    
+    const user = getCurrentUser();
+    if (!user) {
+        console.error('User not found');
+        return;
+    }
+    
+    // Update totals based on actual arrays
+    stats.totalHabits = user.habits.length;
+    stats.totalGoals = user.goals.length;
+    
+    const totalHGNum = stats.totalHabits + stats.totalGoals;
+    const totalComplete = stats.habitsCompleted + stats.goalsCompleted;
+    
+    if (totalHGNum > 0) {
+        stats.progressPercent = Math.round((100 / totalHGNum) * totalComplete);
+    } else {
+        stats.progressPercent = 0;
+    }
+    
+    // Save the updated stats
+    user.stats = stats;
+    saveCurrentUser(user);
 }
 
 // Fetch and display leaderboard
