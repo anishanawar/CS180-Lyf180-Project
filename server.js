@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const OpenAI = require('openai');
+require('dotenv').config();
 const app = express();
 
 // Middleware
@@ -83,6 +85,78 @@ app.get('/api/quote', (req, res) => {
     ];
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
     res.json({ quote: randomQuote });
+});
+
+// OpenAI Configuration
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
+
+// Log API key status (without exposing the actual key)
+console.log('OpenAI API Key Status:', process.env.OPENAI_API_KEY ? 'Present' : 'Missing');
+
+// OpenAI API endpoint for journal analysis
+app.post('/api/analyze-journal', async (req, res) => {
+    try {
+        const { journalEntry, mood } = req.body;
+        
+        const prompt = `Analyze this journal entry and mood, then provide exactly 5 personalized suggestions for goals or habits that would be beneficial. 
+        The suggestions should be specific, actionable, and relevant to the user's current state.
+        
+        Journal Entry: "${journalEntry}"
+        Current Mood: ${mood}
+        
+        Return ONLY a JSON array of exactly 5 strings. Each suggestion should:
+        - Start with a capital letter
+        - End with a period
+        - Be 10-20 words long
+        - Be a complete sentence
+        - Not include any special characters or formatting
+        
+        Example format: ["Start a daily 10-minute meditation practice.", "Take a 30-minute walk after lunch each day.", "Read one chapter of a book before bed.", "Practice deep breathing exercises for 5 minutes each morning.", "Write down three things you're grateful for every evening."]`;
+
+        const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+                {
+                    role: "system",
+                    content: "You are a helpful life coach that provides personalized suggestions based on journal entries and moods. Always respond with exactly 5 suggestions in a JSON array of strings. Each suggestion must be a complete sentence, start with a capital letter, end with a period, and be 10-20 words long."
+                },
+                {
+                    role: "user",
+                    content: prompt
+                }
+            ],
+            temperature: 0.7,
+            max_tokens: 250
+        });
+
+        // Clean the response to ensure it's valid JSON
+        const responseText = completion.choices[0].message.content.trim();
+        const cleanResponse = responseText.replace(/```json\n?|\n?```/g, '').trim();
+        const suggestions = JSON.parse(cleanResponse);
+        
+        // Validate suggestions format
+        if (!Array.isArray(suggestions) || suggestions.length !== 5) {
+            throw new Error('Invalid suggestions format');
+        }
+        
+        // Ensure each suggestion follows the format
+        const formattedSuggestions = suggestions.map(suggestion => {
+            // Capitalize first letter
+            suggestion = suggestion.charAt(0).toUpperCase() + suggestion.slice(1);
+            // Ensure it ends with a period
+            if (!suggestion.endsWith('.')) {
+                suggestion += '.';
+            }
+            return suggestion;
+        });
+        
+        res.json({ suggestions: formattedSuggestions });
+    } catch (error) {
+        console.error('Error analyzing journal:', error);
+        res.status(500).json({ error: 'Failed to analyze journal entry' });
+    }
 });
 
 // API Routes
